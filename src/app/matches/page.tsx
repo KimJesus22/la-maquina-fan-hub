@@ -1,6 +1,7 @@
 import TopNav from "@/components/TopNav";
 import Footer from "@/components/Footer";
 import MatchTimelineItem from "@/components/MatchTimelineItem";
+import EmptyState from "@/components/EmptyState";
 import { getMatches } from "@/app/actions/data";
 
 export default async function MatchesPage() {
@@ -16,9 +17,13 @@ export default async function MatchesPage() {
         </header>
 
         {matches.length === 0 ? (
-           <p className="text-center py-10 text-on-surface-variant font-body-lg">Aún no hay partidos programados para esta temporada.</p>
+          <EmptyState
+            icon="calendar_month"
+            title="Calendario Vacío"
+            description="Aún no hay partidos programados para esta temporada. Mantente atento a los próximos anuncios oficiales."
+          />
         ) : (
-          <div className="relative border-l-2 border-surface-variant ml-4 md:ml-8 pl-8 md:pl-12 space-y-12">
+          <div className="relative border-l-2 border-surface-variant dark:border-slate-800 ml-4 md:ml-8 pl-8 md:pl-12 space-y-12">
             {matches.map(match => (
               <MatchTimelineItem key={match.id} match={match} />
             ))}

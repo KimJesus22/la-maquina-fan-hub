@@ -3,6 +3,7 @@
 import { useState } from "react";
 import type { Player } from "@/lib/types";
 import PlayerCard from "@/components/PlayerCard";
+import EmptyState from "@/components/EmptyState";
 
 export default function SquadClient({ players }: { players: Player[] }) {
   const [filter, setFilter] = useState("Todos");
@@ -54,9 +55,19 @@ export default function SquadClient({ players }: { players: Player[] }) {
         </h2>
         
         {filteredPlayers.length === 0 ? (
-          <p className="text-center text-on-surface-variant py-10 font-body-lg">
-            Aún no hay jugadores registrados en esta categoría.
-          </p>
+          <EmptyState 
+            icon="group_off"
+            title="Sin Jugadores"
+            description={`No hay jugadores registrados en la categoría "${filter}".`}
+            action={
+              <button
+                onClick={() => setFilter("Todos")}
+                className="bg-primary hover:bg-primary-container text-on-primary font-label-md px-6 py-3 rounded-lg shadow-sm transition-all border-b-4 border-tertiary-container hover:-translate-y-1 active:translate-y-0"
+              >
+                Ver toda la plantilla
+              </button>
+            }
+          />
         ) : (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {filteredPlayers.map(player => (
