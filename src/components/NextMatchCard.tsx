@@ -56,8 +56,8 @@ export default function NextMatchCard() {
         <div className="flex flex-col items-center gap-unit flex-1">
           <img
             alt="Cruz Azul"
-            src="https://upload.wikimedia.org/wikipedia/commons/b/b5/Cruz_Azul_logo_%282022%29.svg"
-            className="w-20 h-20 object-contain mb-2 drop-shadow-sm"
+            src="https://scontent.fbjx1-3.fna.fbcdn.net/v/t1.6435-9/34386199_2051058288299294_4514711669837922304_n.jpg?_nc_cat=111&ccb=1-7&_nc_sid=1d70fc&_nc_ohc=RtIAk7bVm9sQ7kNvwFL-n7o&_nc_oc=AdpPzbdzLO4_A9T9Q1OaA1kUQruxeecndV2KR6JM8PjLdq-KcUF_VZndyUADyr7csCU&_nc_zt=23&_nc_ht=scontent.fbjx1-3.fna&_nc_gid=JbdhpIVbqcSBIEI74TBoBw&oh=00_Af2D9oOMGXGEg9AHTch0N3ynZ7Hc7gB3ertl9UdxyyHM7g&oe=6A131EE5"
+            className="w-24 h-24 object-contain mb-2 rounded-full mix-blend-multiply drop-shadow-sm"
           />
           <span className="font-headline-md text-headline-md text-primary font-lexend font-semibold">
             Cruz Azul
@@ -114,8 +114,8 @@ export default function NextMatchCard() {
         <div className="flex flex-col items-center gap-unit flex-1">
           <img
             alt="Necaxa"
-            src="https://upload.wikimedia.org/wikipedia/en/2/29/Club_Necaxa_logo.svg"
-            className="w-20 h-20 object-contain mb-2 drop-shadow-sm"
+            src="https://scontent.fbjx1-3.fna.fbcdn.net/v/t39.30808-6/441212964_850057420495855_323226466028844851_n.jpg?_nc_cat=110&ccb=1-7&_nc_sid=1d70fc&_nc_ohc=hPNTzpxfe9kQ7kNvwFfopaV&_nc_oc=Adoj2KlqJIXDYZZUeldXquSsiJrsoMJk0uxTB4CbvZqjoPSgU1z7gx7pcXYxHtenVMk&_nc_zt=23&_nc_ht=scontent.fbjx1-3.fna&_nc_gid=vZlQy9swojzWjkZfHGMQNg&oh=00_Af3MYRTpcdWYW2Oo38AMh6zC3Pxel-nixPgKhPNSwgkb4g&oe=69F1B086"
+            className="w-24 h-24 object-contain mb-2 rounded-full mix-blend-multiply drop-shadow-sm"
           />
           <span className="font-headline-md text-headline-md text-on-surface-variant font-lexend font-semibold">
             Necaxa
