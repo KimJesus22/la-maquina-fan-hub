@@ -14,8 +14,26 @@ const lexend = Lexend({
 });
 
 export const metadata: Metadata = {
-  title: "Cruz Azul Fan Portal",
-  description: "La Pasión Nos Une",
+  title: {
+    template: "%s | Cruz Azul Fan Portal",
+    default: "Cruz Azul Fan Portal",
+  },
+  description: "La Pasión Nos Une. El portal definitivo para aficionados de La Máquina con noticias y resultados en tiempo real.",
+  openGraph: {
+    title: "Cruz Azul Fan Portal",
+    description: "La Pasión Nos Une. El portal definitivo para aficionados de La Máquina.",
+    url: "https://la-maquina-fan-hub.vercel.app",
+    siteName: "Cruz Azul Fan Portal",
+    images: [
+      {
+        url: "https://upload.wikimedia.org/wikipedia/commons/b/b5/Cruz_Azul_logo_%282022%29.svg",
+        width: 800,
+        height: 600,
+      },
+    ],
+    locale: "es_MX",
+    type: "website",
+  },
 };
 
 import { ThemeProvider } from "@/components/ThemeProvider";
