@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
+import { ThemeToggle } from "@/components/ThemeToggle";
 
 export default function TopNav() {
   return (
@@ -51,7 +52,8 @@ export default function TopNav() {
             Únete
           </Link>
           <div className="flex gap-4">
-            <button className="text-primary hover:text-primary-container transition-colors duration-200">
+            <ThemeToggle />
+            <button className="text-primary hover:text-primary-container dark:text-slate-400 dark:hover:text-white transition-colors duration-200">
               <span className="material-symbols-outlined" data-icon="notifications">
                 notifications
               </span>

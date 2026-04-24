@@ -25,7 +25,7 @@ export default function NewsGrid() {
       </div>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-element-gap">
         {/* Featured News Card (Takes up 2 columns on desktop) */}
-        <div className="md:col-span-2 group relative overflow-hidden rounded-xl border border-primary/10 shadow-sm hover:shadow-[0_8px_30px_rgba(0,48,99,0.12)] transition-all duration-300 bg-surface-container-lowest flex flex-col justify-end min-h-[400px]">
+        <div className="md:col-span-2 group relative overflow-hidden rounded-xl border border-primary/10 dark:border-slate-800 shadow-sm hover:shadow-[0_8px_30px_rgba(0,48,99,0.12)] transition-all duration-300 bg-surface-container-lowest dark:bg-slate-900 flex flex-col justify-end min-h-[400px]">
           <Image
             alt="Professional soccer player in blue uniform kicking a soccer ball dynamically on a green grass field during a match"
             src="https://lh3.googleusercontent.com/aida-public/AB6AXuCcYitcJfUXEEXQaOGPB9hGrXpK5QK4-3qCgzEik1DNn_X3RXWrF0nowwq1VZkBcQmuFond9GLKTfSp7Z8_QjEzafnodjSl4bu50oL8-BD9_y_GSy2foCVEMKh9AfAibnZeqalE_NXMDPoU3LpmqNPNV4IORfam8tuwTnXAtfFOMItZK9jsnxTyilIRu56xjHR7O4TqnG9vqjjjdEaH58J4u4pYoAtfjE5b4CY8dwmT0amMZQTSP4AFzBLMPSNLYgIpjkJENI3crxHc"
@@ -53,7 +53,7 @@ export default function NewsGrid() {
           </div>
         </div>
         {/* Secondary News Card 1 */}
-        <div className="group relative overflow-hidden rounded-xl border border-primary/10 shadow-sm hover:shadow-[0_8px_30px_rgba(0,48,99,0.12)] transition-all duration-300 bg-surface-container-lowest flex flex-col h-full">
+        <div className="group relative overflow-hidden rounded-xl border border-primary/10 dark:border-slate-800 shadow-sm hover:shadow-[0_8px_30px_rgba(0,48,99,0.12)] transition-all duration-300 bg-surface-container-lowest dark:bg-slate-900 flex flex-col h-full">
           <div className="h-48 overflow-hidden relative">
             <Image
               alt="Crowd of cheering sports fans in stadium seating holding scarves up in the air with dramatic lighting"
@@ -67,11 +67,11 @@ export default function NewsGrid() {
               </span>
             </div>
           </div>
-          <div className="p-gutter flex flex-col flex-grow relative z-10 bg-white">
-            <h3 className="font-headline-md text-headline-md text-on-surface mb-2 group-hover:text-primary transition-colors font-lexend font-semibold">
+          <div className="p-gutter flex flex-col flex-grow relative z-10 bg-white dark:bg-slate-900 transition-colors duration-300">
+            <h3 className="font-headline-md text-headline-md text-on-surface dark:text-slate-100 mb-2 group-hover:text-primary dark:group-hover:text-primary-fixed-dim transition-colors font-lexend font-semibold">
               Venta de boletos exclusiva para Abonados
             </h3>
-            <p className="font-body-md text-body-md text-secondary line-clamp-3 mb-4 flex-grow">
+            <p className="font-body-md text-body-md text-secondary dark:text-slate-400 line-clamp-3 mb-4 flex-grow transition-colors duration-300">
               Inicia la preventa especial para el próximo partido como local. Conoce los
               horarios y zonas disponibles.
             </p>

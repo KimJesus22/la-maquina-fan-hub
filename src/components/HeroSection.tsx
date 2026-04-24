@@ -4,7 +4,7 @@ export default function HeroSection() {
   return (
     <section className="relative min-h-[819px] flex items-center justify-center overflow-hidden">
       {/* Fondo Premium y Gradiente */}
-      <div className="absolute inset-0 z-0 bg-primary bg-gradient-to-br from-primary via-primary-container to-primary">
+      <div className="absolute inset-0 z-0 bg-primary dark:bg-slate-900 bg-gradient-to-br from-primary via-primary-container to-primary dark:from-slate-900 dark:via-slate-800 dark:to-slate-900 transition-colors duration-300">
         
         {/* Textura Técnica (Malla Deportiva) */}
         <div className="absolute inset-0 opacity-20 bg-[radial-gradient(#ffffff_1px,transparent_1px)] bg-[size:24px_24px]"></div>
@@ -17,7 +17,7 @@ export default function HeroSection() {
         />
         
         {/* Sombra inferior para fundirse con la siguiente sección */}
-        <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-background to-transparent"></div>
+        <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-background dark:from-slate-950 to-transparent transition-colors duration-300"></div>
       </div>
 
       {/* Contenido Principal */}

@@ -18,20 +18,26 @@ export const metadata: Metadata = {
   description: "La Pasión Nos Une",
 };
 
+import { ThemeProvider } from "@/components/ThemeProvider";
+
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="es" className={`${inter.variable} ${lexend.variable}`}>
+    <html lang="es" className={`${inter.variable} ${lexend.variable}`} suppressHydrationWarning>
       <head>
         <link
           href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
           rel="stylesheet"
         />
       </head>
-      <body>{children}</body>
+      <body className="bg-background text-on-background dark:bg-slate-950 dark:text-slate-100 transition-colors duration-300">
+        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+          {children}
+        </ThemeProvider>
+      </body>
     </html>
   );
 }
