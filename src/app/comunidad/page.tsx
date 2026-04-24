@@ -6,10 +6,14 @@ import { signOut } from "@/app/actions/auth";
 import PlayersSection from "./PlayersSection";
 import MatchesSection from "./MatchesSection";
 import Loading from "./loading";
+import MuroAficion from "./MuroAficion";
+import { getRecentMessages } from "@/actions/chat";
 
 export default async function ComunidadPage() {
   const session = await getSession();
   if (!session) redirect("/");
+
+  const recentMessages = await getRecentMessages();
 
   return (
     <main className="mx-auto flex w-full max-w-7xl flex-1 flex-col gap-10 px-4 py-10 sm:px-6 lg:px-8">
@@ -60,13 +64,22 @@ export default async function ComunidadPage() {
         {/* Partidos (2/5) */}
         <section className="lg:col-span-2">
           <h2 className="mb-5 text-lg font-semibold text-white">
-            📅 Partidos
+            📅 Próximos Partidos
           </h2>
           <Suspense fallback={<Loading />}>
             <MatchesSection />
           </Suspense>
         </section>
       </div>
+
+      {/* Fila de Muro de Afición */}
+      <section className="mt-4">
+        <h2 className="mb-5 text-lg font-semibold text-white flex items-center gap-2">
+          <span className="material-symbols-outlined">forum</span> 
+          Muro de la Afición
+        </h2>
+        <MuroAficion initialMessages={recentMessages} currentUserEmail={session.email} />
+      </section>
     </main>
   );
 }
