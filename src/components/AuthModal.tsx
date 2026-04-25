@@ -30,7 +30,7 @@ export default function AuthModal({ open, onClose }: AuthModalProps) {
   const [passwordTouched, setPasswordTouched] = useState(false);
 
   const isValidEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-  const isValidPassword = password.length >= 6;
+  const isValidPassword = password.length >= 8;
   const isFormValid = isValidEmail && isValidPassword;
 
   // Estados asíncronos para interactuar con Server Actions (InsForge)
@@ -213,11 +213,17 @@ export default function AuthModal({ open, onClose }: AuthModalProps) {
                     {showPassword ? "visibility" : "visibility_off"}
                   </span>
                 </button>
+                {/* Feedback visual sutil (Poka-yoke de recompensa) */}
+                {isValidPassword && (
+                  <div className="absolute inset-y-0 right-10 flex items-center pr-2 text-green-500 animate-pulse transition-opacity duration-300 pointer-events-none">
+                    <span className="material-symbols-outlined text-xl">check_circle</span>
+                  </div>
+                )}
               </div>
               {passwordTouched && !isValidPassword && (
                 <span className="text-error text-xs ml-1 font-label-md flex items-center gap-1">
                   <span className="material-symbols-outlined text-[14px]">error</span>
-                  Debe tener al menos 6 caracteres
+                  Debe tener al menos 8 caracteres
                 </span>
               )}
             </div>
@@ -250,7 +256,7 @@ export default function AuthModal({ open, onClose }: AuthModalProps) {
               className={cn(
                 "w-full py-4 rounded-lg font-headline-lg text-headline-lg text-[18px] uppercase tracking-wide shadow-md transition-all mt-2 flex items-center justify-center gap-2 border-r-4",
                 isPending || !isFormValid
-                  ? "bg-outline-variant text-outline cursor-not-allowed border-transparent opacity-70 dark:bg-slate-800 dark:text-slate-500"
+                  ? "bg-outline-variant text-outline cursor-not-allowed border-transparent opacity-50 dark:bg-slate-800 dark:text-slate-500"
                   : "bg-primary-container dark:bg-primary text-on-primary dark:text-white hover:bg-primary hover:-translate-y-1 active:translate-y-0 border-tertiary-container dark:border-tertiary"
               )}
             >
