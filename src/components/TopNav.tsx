@@ -1,8 +1,11 @@
 import Link from "next/link";
 import Image from "next/image";
 import { ThemeToggle } from "@/components/ThemeToggle";
+import { useAuth } from "@/context/AuthContext";
 
 export default function TopNav() {
+  const { user } = useAuth();
+
   return (
     <header className="bg-white/95 dark:bg-slate-900/95 backdrop-blur-sm docked full-width top-0 sticky z-50 border-b border-slate-100 dark:border-slate-800 flat no-shadow">
       <div className="flex justify-between items-center max-w-7xl mx-auto px-6 py-4">
@@ -44,25 +47,34 @@ export default function TopNav() {
           </nav>
         </div>
         <div className="flex items-center gap-element-gap">
-          <Link
-            href="?auth=login"
-            scroll={false}
-            className="hidden md:flex bg-primary text-on-primary font-label-md text-label-md px-6 py-2 rounded border-r-2 border-transparent hover:border-tertiary transition-all"
-          >
-            Únete
-          </Link>
+          {!user ? (
+            <Link
+              href="?auth=login"
+              scroll={false}
+              className="hidden md:flex bg-primary text-on-primary font-label-md text-label-md px-6 py-2 rounded border-r-2 border-transparent hover:border-tertiary transition-all shadow-sm"
+            >
+              Únete
+            </Link>
+          ) : null}
           <div className="flex gap-4">
             <ThemeToggle />
-            <button className="text-primary hover:text-primary-container dark:text-slate-400 dark:hover:text-white transition-colors duration-200">
-              <span className="material-symbols-outlined" data-icon="notifications">
-                notifications
-              </span>
-            </button>
-            <button className="text-primary hover:text-primary-container transition-colors duration-200">
-              <span className="material-symbols-outlined" data-icon="person">
-                person
-              </span>
-            </button>
+            {user ? (
+              <>
+                <button className="text-primary hover:text-primary-container dark:text-slate-400 dark:hover:text-white transition-colors duration-200">
+                  <span className="material-symbols-outlined" data-icon="notifications">
+                    notifications
+                  </span>
+                </button>
+                <button className="text-primary hover:text-primary-container dark:text-slate-400 dark:hover:text-white transition-colors duration-200 flex items-center gap-2">
+                  <span className="material-symbols-outlined" data-icon="person">
+                    person
+                  </span>
+                  <span className="hidden md:block text-xs font-bold font-lexend uppercase tracking-wide">
+                    {user.email.split("@")[0]}
+                  </span>
+                </button>
+              </>
+            ) : null}
           </div>
         </div>
       </div>

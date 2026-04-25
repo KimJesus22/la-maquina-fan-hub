@@ -37,12 +37,16 @@ export const metadata: Metadata = {
 };
 
 import { ThemeProvider } from "@/components/ThemeProvider";
+import { AuthProvider } from "@/context/AuthContext";
+import { getSession } from "@/lib/session";
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const session = await getSession();
+
   return (
     <html lang="es" className={`${inter.variable} ${lexend.variable}`} suppressHydrationWarning>
       <head>
@@ -53,7 +57,9 @@ export default function RootLayout({
       </head>
       <body className="bg-background text-on-background dark:bg-slate-950 dark:text-slate-100 transition-colors duration-300">
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-          {children}
+          <AuthProvider initialSession={session}>
+            {children}
+          </AuthProvider>
         </ThemeProvider>
       </body>
     </html>

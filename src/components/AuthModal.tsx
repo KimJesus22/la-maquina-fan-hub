@@ -1,8 +1,9 @@
 "use client";
 
-import { useState, useActionState } from "react";
+import { useState, useActionState, useEffect } from "react";
 import { signIn, signUp, type AuthState } from "@/app/actions/auth";
 import { cn } from "@/lib/cn";
+import { useAuth } from "@/context/AuthContext";
 
 interface AuthModalProps {
   open: boolean;
@@ -10,6 +11,15 @@ interface AuthModalProps {
 }
 
 export default function AuthModal({ open, onClose }: AuthModalProps) {
+  const { user } = useAuth();
+
+  // Escucha activa de sesión: si el usuario hace login exitosamente, el modal se cierra solo
+  useEffect(() => {
+    if (user && open) {
+      onClose();
+    }
+  }, [user, open, onClose]);
+
   const [mode, setMode] = useState<"login" | "register">("login");
   const [showPassword, setShowPassword] = useState(false);
 
