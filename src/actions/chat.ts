@@ -4,11 +4,27 @@ import { insforge } from "@/lib/insforge";
 import { getSession } from "@/lib/session";
 import { revalidatePath } from "next/cache";
 
+const rateLimitMap = new Map<string, number>();
+const RATE_LIMIT_WINDOW = 3000; // 3 segundos de espera mínima
+
 export async function sendFanMessage(formData: FormData) {
   const session = await getSession();
   if (!session) {
     return { error: "No estás autenticado" };
   }
+
+  // Rate Limiting Básico
+  const userId = session.id || session.email;
+  const now = Date.now();
+  const lastMessageTime = rateLimitMap.get(userId);
+
+  if (lastMessageTime && now - lastMessageTime < RATE_LIMIT_WINDOW) {
+    const timeLeft = Math.ceil((RATE_LIMIT_WINDOW - (now - lastMessageTime)) / 1000);
+    return { error: `Espera ${timeLeft}s antes de enviar otro mensaje.` };
+  }
+  
+  // Registrar tiempo del intento
+  rateLimitMap.set(userId, now);
 
   const message = formData.get("message") as string;
   if (!message || message.trim().length === 0) {

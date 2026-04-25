@@ -14,6 +14,7 @@ export interface FanMessage {
 
 export default function MuroAficion({ initialMessages, currentUserEmail }: { initialMessages: FanMessage[], currentUserEmail: string }) {
   const [messages, setMessages] = useState<FanMessage[]>(initialMessages);
+  const [errorMsg, setErrorMsg] = useState<string | null>(null);
   const scrollRef = useRef<HTMLDivElement>(null);
   const formRef = useRef<HTMLFormElement>(null);
   
@@ -50,7 +51,7 @@ export default function MuroAficion({ initialMessages, currentUserEmail }: { ini
   }, []);
 
   return (
-    <div className="flex flex-col h-[500px] bg-white dark:bg-slate-900/50 border border-primary/10 dark:border-slate-800 rounded-xl shadow-sm overflow-hidden transition-colors duration-300 backdrop-blur-sm">
+    <div className="flex flex-col h-[500px] bg-white dark:bg-slate-900/50 border border-primary/10 dark:border-slate-800 rounded-xl shadow-sm overflow-hidden transition-colors duration-300 backdrop-blur-sm relative">
       
       {/* Header del Chat */}
       <div className="bg-primary px-4 py-3 border-b border-primary/20 flex items-center gap-2">
@@ -90,14 +91,29 @@ export default function MuroAficion({ initialMessages, currentUserEmail }: { ini
         )}
       </div>
 
+      {/* Alerta de Error / Rate Limit */}
+      {errorMsg && (
+        <div className="absolute bottom-20 left-4 right-4 bg-error-container text-on-error-container text-xs px-3 py-2 rounded-md shadow-md animate-bounce flex justify-between items-center z-10 font-label-md">
+          <span>{errorMsg}</span>
+          <button onClick={() => setErrorMsg(null)} className="material-symbols-outlined text-[14px]">close</button>
+        </div>
+      )}
+
       {/* Área de Input (Sticky inferior) */}
       <form 
         ref={formRef}
         action={async (formData) => {
-          await sendFanMessage(formData);
-          formRef.current?.reset();
+          setErrorMsg(null);
+          const res = await sendFanMessage(formData);
+          if (res?.error) {
+            setErrorMsg(res.error);
+            // Auto-cerrar el error despues de 3 segundos
+            setTimeout(() => setErrorMsg(null), 3000);
+          } else {
+            formRef.current?.reset();
+          }
         }}
-        className="p-3 bg-white dark:bg-slate-900 border-t border-primary/10 dark:border-slate-800 flex gap-2 transition-colors duration-300"
+        className="p-3 bg-white dark:bg-slate-900 border-t border-primary/10 dark:border-slate-800 flex gap-2 transition-colors duration-300 relative z-20"
       >
         <input 
           type="text" 
