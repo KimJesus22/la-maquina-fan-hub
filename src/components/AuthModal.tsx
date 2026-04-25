@@ -47,6 +47,19 @@ export default function AuthModal({ open, onClose }: AuthModalProps) {
   const isPending = mode === "login" ? loginPending : registerPending;
   const currentState = mode === "login" ? loginState : registerState;
 
+  // Estado global del formulario para manejar errores del servidor
+  const [serverError, setServerError] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (currentState?.error) {
+      setServerError(currentState.error);
+    }
+  }, [currentState]);
+
+  const clearServerError = () => {
+    if (serverError) setServerError(null);
+  };
+
   if (!open) return null;
 
   return (
@@ -128,7 +141,10 @@ export default function AuthModal({ open, onClose }: AuthModalProps) {
                   type="email"
                   required
                   value={email}
-                  onChange={(e) => setEmail(e.target.value)}
+                  onChange={(e) => {
+                    setEmail(e.target.value);
+                    clearServerError();
+                  }}
                   onBlur={() => setEmailTouched(true)}
                   placeholder="Correo Electrónico"
                   className={cn(
@@ -178,7 +194,10 @@ export default function AuthModal({ open, onClose }: AuthModalProps) {
                   type={showPassword ? "text" : "password"}
                   required
                   value={password}
-                  onChange={(e) => setPassword(e.target.value)}
+                  onChange={(e) => {
+                    setPassword(e.target.value);
+                    clearServerError();
+                  }}
                   onBlur={() => setPasswordTouched(true)}
                   placeholder="Contraseña"
                   className={cn(
@@ -229,12 +248,12 @@ export default function AuthModal({ open, onClose }: AuthModalProps) {
             </div>
 
             {/* Error Hint de InsForge (ej. credenciales inválidas) */}
-            {currentState?.error && (
+            {serverError && (
               <p className="font-label-md text-label-md text-error flex items-center gap-1 mt-1">
                 <span className="material-symbols-outlined text-[14px]">
                   error
                 </span>
-                {currentState.error}
+                {serverError}
               </p>
             )}
 

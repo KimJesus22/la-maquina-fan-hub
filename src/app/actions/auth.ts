@@ -32,7 +32,11 @@ export async function signUp(
   });
 
   if (error) {
-    return { error: error.message ?? "Error al crear la cuenta." };
+    let msg = error.message ?? "Error al crear la cuenta.";
+    if (error.message.includes("User already registered") || error.message.includes("already exists")) {
+      msg = "Este correo ya pertenece a la comunidad, intenta iniciar sesión.";
+    }
+    return { error: msg };
   }
 
   if (data?.requireEmailVerification) {
@@ -71,10 +75,10 @@ export async function signIn(
 
   if (error) {
     // Mapear errores comunes a español
-    const msg =
-      error.message === "Invalid login credentials"
-        ? "Credenciales inválidas. Verifica tu correo y contraseña."
-        : (error.message ?? "Error al iniciar sesión.");
+    let msg = error.message ?? "Error al iniciar sesión.";
+    if (error.message === "Invalid login credentials") {
+      msg = "El correo o la contraseña son incorrectos.";
+    }
     return { error: msg };
   }
 
