@@ -51,17 +51,38 @@ export async function sendFanMessage(formData: FormData) {
 }
 
 export async function getRecentMessages() {
-  const { data, error } = await insforge.database
-    .from("fan_messages")
-    .select("*")
-    .order("created_at", { ascending: false })
-    .limit(50);
-
-  if (error) {
-    console.error("Error fetching messages:", error);
+  const session = await getSession();
+  
+  if (!session?.accessToken) {
+    console.error("No hay sesión para leer mensajes (RLS activo).");
     return [];
   }
 
-  // Retornar en orden cronológico (los más viejos arriba)
-  return (data || []).reverse();
+  try {
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_INSFORGE_URL}/rest/v1/fan_messages?select=*&order=created_at.desc&limit=50`,
+      {
+        method: "GET",
+        headers: {
+          "apikey": process.env.NEXT_PUBLIC_INSFORGE_ANON_KEY!,
+          "Authorization": `Bearer ${session.accessToken}`,
+          "Content-Type": "application/json"
+        },
+        cache: "no-store" // Desactivar cacheo para el chat en tiempo real
+      }
+    );
+
+    if (!res.ok) {
+      const errorText = await res.text();
+      console.error("Error de InsForge REST API:", errorText);
+      return [];
+    }
+
+    const data = await res.json();
+    // Retornar en orden cronológico (los más viejos arriba)
+    return (data || []).reverse();
+  } catch (error) {
+    console.error("Excepción en fetch de mensajes:", error);
+    return [];
+  }
 }
