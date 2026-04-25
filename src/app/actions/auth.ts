@@ -91,5 +91,4 @@ export async function signIn(
 export async function signOut() {
   await insforge.auth.signOut();
   await deleteSession();
-  redirect("/");
 }

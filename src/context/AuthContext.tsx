@@ -3,12 +3,18 @@
 import { createContext, useContext, useEffect, useState, ReactNode } from "react";
 import type { SessionPayload } from "@/lib/session";
 import { insforge } from "@/lib/insforge";
+import { signOut as serverSignOut } from "@/app/actions/auth";
+import { useRouter } from "next/navigation";
 
 interface AuthContextType {
   user: SessionPayload | null;
+  signOut: () => Promise<void>;
 }
 
-const AuthContext = createContext<AuthContextType>({ user: null });
+const AuthContext = createContext<AuthContextType>({ 
+  user: null,
+  signOut: async () => {}
+});
 
 export function AuthProvider({ 
   children, 
@@ -18,6 +24,7 @@ export function AuthProvider({
   initialSession: SessionPayload | null;
 }) {
   const [user, setUser] = useState<SessionPayload | null>(initialSession);
+  const router = useRouter();
 
   useEffect(() => {
     // 1. Sincroniza con el estado del Server Component (Layout)
@@ -40,8 +47,19 @@ export function AuthProvider({
     };
   }, [initialSession]);
 
+  const handleSignOut = async () => {
+    // Limpieza de estado local inmediato para UX optimista
+    setUser(null);
+    
+    // Llamada al Server Action para destruir token de InsForge y la cookie segura
+    await serverSignOut();
+    
+    // Redirección forzada al landing page
+    router.push("/");
+  };
+
   return (
-    <AuthContext.Provider value={{ user }}>
+    <AuthContext.Provider value={{ user, signOut: handleSignOut }}>
       {children}
     </AuthContext.Provider>
   );
