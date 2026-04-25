@@ -77,10 +77,10 @@ export default function MuroAficion({ initialMessages, currentUserEmail }: { ini
             const isMe = currentUserEmail.startsWith(msg.username);
             return (
               <div key={msg.id} className={`flex flex-col ${isMe ? "items-end" : "items-start"}`}>
-                <span className="text-[10px] text-slate-500 dark:text-slate-400 mb-1 px-1 font-lexend font-semibold uppercase">
+                <span className="text-xs text-outline dark:text-slate-500 mb-1 px-1 font-lexend font-semibold">
                   {msg.username}
                 </span>
-                <div className={`px-4 py-2 rounded-2xl max-w-[85%] text-sm font-body-md shadow-sm ${
+                <div className={`px-4 py-2 rounded-2xl max-w-[85%] font-body-md shadow-sm ${
                   isMe 
                     ? "bg-primary text-on-primary rounded-br-sm" 
                     : "bg-surface-container-high dark:bg-slate-800 text-on-surface dark:text-slate-100 rounded-bl-sm"
@@ -95,13 +95,13 @@ export default function MuroAficion({ initialMessages, currentUserEmail }: { ini
 
       {/* Alerta de Error / Rate Limit */}
       {errorMsg && (
-        <div className="absolute bottom-20 left-4 right-4 bg-error-container text-on-error-container text-xs px-3 py-2 rounded-md shadow-md animate-bounce flex justify-between items-center z-10 font-label-md">
+        <div className="absolute bottom-20 left-4 right-4 bg-error-container text-on-error-container text-xs px-3 py-2 rounded-md shadow-md animate-bounce flex justify-between items-center z-30 font-label-md">
           <span>{errorMsg}</span>
           <button onClick={() => setErrorMsg(null)} className="material-symbols-outlined text-[14px]">close</button>
         </div>
       )}
 
-      {/* Área de Input (Sticky inferior) */}
+      {/* Área de Input (Sticky inferior con Glassmorphism) */}
       <form 
         ref={formRef}
         action={async (formData) => {
@@ -115,7 +115,7 @@ export default function MuroAficion({ initialMessages, currentUserEmail }: { ini
             formRef.current?.reset();
           }
         }}
-        className="p-3 bg-white dark:bg-slate-900 border-t border-primary/10 dark:border-slate-800 flex gap-2 transition-colors duration-300 relative z-20"
+        className="sticky bottom-0 p-3 bg-white/80 dark:bg-slate-900/80 backdrop-blur-md border-t border-primary/10 dark:border-slate-800 flex gap-2 transition-colors duration-300 z-20"
       >
         <input 
           type="text" 
