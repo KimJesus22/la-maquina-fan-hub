@@ -17,10 +17,12 @@ export default function TopNav() {
         <div className="flex items-center gap-element-gap">
           {/* Hamburger Menu Toggle (Mobile Only) */}
           <button 
-            className="md:hidden text-primary dark:text-white p-2 min-h-[44px] min-w-[44px] flex items-center justify-center -ml-2"
+            className="md:hidden text-primary dark:text-white p-2 min-h-[44px] min-w-[44px] flex items-center justify-center -ml-2 focus:outline-none focus:ring-2 focus:ring-primary-container focus:ring-offset-2 rounded"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            aria-label={mobileMenuOpen ? "Cerrar menú principal" : "Abrir menú principal"}
+            aria-expanded={mobileMenuOpen}
           >
-            <span className="material-symbols-outlined">
+            <span className="material-symbols-outlined" aria-hidden="true">
               {mobileMenuOpen ? "close" : "menu"}
             </span>
           </button>
@@ -75,17 +77,22 @@ export default function TopNav() {
             <ThemeToggle />
             {user ? (
               <>
-                <button className="text-primary hover:text-primary-container dark:text-slate-400 dark:hover:text-white transition-colors duration-200 p-2 min-h-[44px] min-w-[44px] flex items-center justify-center">
-                  <span className="material-symbols-outlined" data-icon="notifications">
+                <button 
+                  className="text-primary hover:text-primary-container dark:text-slate-400 dark:hover:text-white transition-colors duration-200 p-2 min-h-[44px] min-w-[44px] flex items-center justify-center focus:outline-none focus:ring-2 focus:ring-primary-container focus:ring-offset-2 rounded-full"
+                  aria-label="Notificaciones"
+                >
+                  <span className="material-symbols-outlined" data-icon="notifications" aria-hidden="true">
                     notifications
                   </span>
                 </button>
                 <div className="relative">
                   <button 
                     onClick={() => setDropdownOpen(!dropdownOpen)}
-                    className="text-primary hover:text-primary-container dark:text-slate-400 dark:hover:text-white transition-colors duration-200 flex items-center justify-center gap-2 p-2 min-h-[44px]"
+                    className="text-primary hover:text-primary-container dark:text-slate-400 dark:hover:text-white transition-colors duration-200 flex items-center justify-center gap-2 p-2 min-h-[44px] focus:outline-none focus:ring-2 focus:ring-primary-container focus:ring-offset-2 rounded"
+                    aria-label="Abrir menú de perfil"
+                    aria-expanded={dropdownOpen}
                   >
-                    <span className="material-symbols-outlined" data-icon="person">
+                    <span className="material-symbols-outlined" data-icon="person" aria-hidden="true">
                       person
                     </span>
                     <span className="hidden md:block text-xs font-bold font-lexend uppercase tracking-wide">
@@ -107,9 +114,9 @@ export default function TopNav() {
                           setDropdownOpen(false);
                           signOut();
                         }}
-                        className="flex items-center gap-2 px-4 py-3 min-h-[44px] text-sm font-semibold text-tertiary-container dark:text-red-400 hover:bg-error-container/10 dark:hover:bg-red-900/20 transition-colors text-left w-full"
+                        className="flex items-center gap-2 px-4 py-3 min-h-[44px] text-sm font-semibold text-tertiary-container dark:text-red-400 hover:bg-error-container/10 dark:hover:bg-red-900/20 transition-colors text-left w-full focus:outline-none focus:bg-error-container/10 dark:focus:bg-red-900/20"
                       >
-                        <span className="material-symbols-outlined text-[18px]">logout</span>
+                        <span className="material-symbols-outlined text-[18px]" aria-hidden="true">logout</span>
                         Cerrar Sesión
                       </button>
                     </div>

@@ -19,10 +19,10 @@ export function ThemeToggle() {
   return (
     <button
       onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-      className="p-2 rounded-full text-primary hover:text-primary-container dark:text-slate-400 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors duration-300 flex items-center justify-center w-10 h-10"
-      aria-label="Toggle Dark Mode"
+      className="p-2 rounded-full text-primary hover:text-primary-container dark:text-slate-400 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors duration-300 flex items-center justify-center min-w-[44px] min-h-[44px] focus:outline-none focus:ring-2 focus:ring-primary-container focus:ring-offset-2"
+      aria-label={theme === "dark" ? "Activar modo claro" : "Activar modo oscuro"}
     >
-      <span className="material-symbols-outlined">
+      <span className="material-symbols-outlined" aria-hidden="true">
         {theme === "dark" ? "light_mode" : "dark_mode"}
       </span>
     </button>

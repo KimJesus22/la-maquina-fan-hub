@@ -124,7 +124,7 @@ export default function NextMatchCard() {
       </div>
 
       <div className="mt-element-gap flex justify-center w-full md:w-auto">
-        <button className="w-full md:w-auto bg-surface-container text-primary font-label-md text-label-md px-6 py-3 rounded border border-primary/20 hover:bg-surface-container-high hover:border-primary transition-all min-h-[44px]">
+        <button className="w-full md:w-auto bg-surface-container text-primary font-label-md text-label-md px-6 py-3 rounded border border-primary/20 hover:bg-surface-container-high hover:border-primary transition-all min-h-[44px] focus:outline-none focus:ring-2 focus:ring-primary-container focus:ring-offset-2">
           Comprar Boletos
         </button>
       </div>

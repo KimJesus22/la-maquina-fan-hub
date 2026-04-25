@@ -79,9 +79,10 @@ export default function AuthModal({ open, onClose }: AuthModalProps) {
         <button
           onClick={onClose}
           type="button"
-          className="absolute top-4 right-4 text-outline dark:text-slate-400 hover:text-on-surface dark:hover:text-white transition-colors p-2 rounded-full hover:bg-surface-variant dark:hover:bg-slate-800 z-10"
+          className="absolute top-4 right-4 text-outline dark:text-slate-400 hover:text-on-surface dark:hover:text-white transition-colors p-2 rounded-full hover:bg-surface-variant dark:hover:bg-slate-800 z-10 focus:outline-none focus:ring-2 focus:ring-primary-container focus:ring-offset-2"
+          aria-label="Cerrar ventana emergente"
         >
-          <span className="material-symbols-outlined">close</span>
+          <span className="material-symbols-outlined" aria-hidden="true">close</span>
         </button>
 
         {/* Header */}
@@ -90,6 +91,7 @@ export default function AuthModal({ open, onClose }: AuthModalProps) {
             <span
               className="material-symbols-outlined text-on-primary dark:text-white text-3xl"
               style={{ fontVariationSettings: "'FILL' 1" }}
+              aria-hidden="true"
             >
               sports_soccer
             </span>
@@ -171,7 +173,7 @@ export default function AuthModal({ open, onClose }: AuthModalProps) {
               </div>
               {emailTouched && !isValidEmail && (
                 <span className="text-error text-xs ml-1 font-label-md flex items-center gap-1">
-                  <span className="material-symbols-outlined text-[14px]">error</span>
+                  <span className="material-symbols-outlined text-[14px]" aria-hidden="true">error</span>
                   Ingresa un correo válido (ej: aficionado@cruzazul.mx)
                 </span>
               )}
@@ -228,23 +230,24 @@ export default function AuthModal({ open, onClose }: AuthModalProps) {
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
-                  className="absolute inset-y-0 right-0 flex items-center pr-4 text-outline dark:text-slate-500 hover:text-on-surface dark:hover:text-white transition-colors"
+                  className="absolute inset-y-0 right-0 flex items-center pr-4 text-outline dark:text-slate-500 hover:text-on-surface dark:hover:text-white transition-colors focus:outline-none focus:ring-2 focus:ring-primary-container focus:ring-offset-2 rounded"
                   tabIndex={-1}
+                  aria-label={showPassword ? "Ocultar contraseña" : "Mostrar contraseña"}
                 >
-                  <span className="material-symbols-outlined text-xl">
+                  <span className="material-symbols-outlined text-xl" aria-hidden="true">
                     {showPassword ? "visibility" : "visibility_off"}
                   </span>
                 </button>
                 {/* Feedback visual sutil (Poka-yoke de recompensa) */}
                 {isValidPassword && (
                   <div className="absolute inset-y-0 right-10 flex items-center pr-2 text-green-500 animate-pulse transition-opacity duration-300 pointer-events-none">
-                    <span className="material-symbols-outlined text-xl">check_circle</span>
+                    <span className="material-symbols-outlined text-xl" aria-hidden="true">check_circle</span>
                   </div>
                 )}
               </div>
               {passwordTouched && !isValidPassword && (
                 <span className="text-error text-xs ml-1 font-label-md flex items-center gap-1">
-                  <span className="material-symbols-outlined text-[14px]">error</span>
+                  <span className="material-symbols-outlined text-[14px]" aria-hidden="true">error</span>
                   Debe tener al menos 8 caracteres
                 </span>
               )}
@@ -296,13 +299,13 @@ export default function AuthModal({ open, onClose }: AuthModalProps) {
                   {/* Feedback visual sutil (Poka-yoke de recompensa) */}
                   {isPasswordsMatch && confirmPassword.length > 0 && (
                     <div className="absolute inset-y-0 right-4 flex items-center pr-2 text-green-500 animate-pulse transition-opacity duration-300 pointer-events-none">
-                      <span className="material-symbols-outlined text-xl">check_circle</span>
+                      <span className="material-symbols-outlined text-xl" aria-hidden="true">check_circle</span>
                     </div>
                   )}
                 </div>
                 {confirmPasswordTouched && !isPasswordsMatch && (
                   <span className="text-error text-xs ml-1 font-label-md flex items-center gap-1">
-                    <span className="material-symbols-outlined text-[14px]">error</span>
+                    <span className="material-symbols-outlined text-[14px]" aria-hidden="true">error</span>
                     Las contraseñas no coinciden
                   </span>
                 )}
@@ -311,8 +314,8 @@ export default function AuthModal({ open, onClose }: AuthModalProps) {
 
             {/* Error Hint de InsForge (ej. credenciales inválidas) */}
             {serverError && (
-              <p className="font-label-md text-label-md text-error flex items-center gap-1 mt-1">
-                <span className="material-symbols-outlined text-[14px]">
+              <p className="font-label-md text-label-md text-error flex items-center gap-1 mt-1" role="alert">
+                <span className="material-symbols-outlined text-[14px]" aria-hidden="true">
                   error
                 </span>
                 {serverError}
@@ -335,7 +338,7 @@ export default function AuthModal({ open, onClose }: AuthModalProps) {
               type="submit"
               disabled={isPending || !isFormValid}
               className={cn(
-                "w-full py-4 rounded-lg font-headline-lg text-headline-lg text-[18px] uppercase tracking-wide shadow-md transition-all mt-2 flex items-center justify-center gap-2 border-r-4",
+                "w-full py-4 rounded-lg font-headline-lg text-headline-lg text-[18px] uppercase tracking-wide shadow-md transition-all mt-2 flex items-center justify-center gap-2 border-r-4 focus:outline-none focus:ring-2 focus:ring-primary-container focus:ring-offset-2",
                 isPending || !isFormValid
                   ? "bg-outline-variant text-outline cursor-not-allowed border-transparent opacity-50 dark:bg-slate-800 dark:text-slate-500"
                   : "bg-primary-container dark:bg-primary text-on-primary dark:text-white hover:bg-primary hover:-translate-y-1 active:translate-y-0 border-tertiary-container dark:border-tertiary"
