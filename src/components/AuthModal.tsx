@@ -28,10 +28,13 @@ export default function AuthModal({ open, onClose }: AuthModalProps) {
   const [password, setPassword] = useState("");
   const [emailTouched, setEmailTouched] = useState(false);
   const [passwordTouched, setPasswordTouched] = useState(false);
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [confirmPasswordTouched, setConfirmPasswordTouched] = useState(false);
 
   const isValidEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
   const isValidPassword = password.length >= 8;
-  const isFormValid = isValidEmail && isValidPassword;
+  const isPasswordsMatch = mode === "register" ? password === confirmPassword && confirmPassword.length > 0 : true;
+  const isFormValid = isValidEmail && isValidPassword && isPasswordsMatch;
 
   // Estados asíncronos para interactuar con Server Actions (InsForge)
   const [loginState, loginAction, loginPending] = useActionState<
@@ -247,6 +250,65 @@ export default function AuthModal({ open, onClose }: AuthModalProps) {
               )}
             </div>
 
+            {mode === "register" && (
+              <div className="flex flex-col gap-1">
+                <div className="relative group">
+                  <div
+                    className={cn(
+                      "absolute inset-y-0 left-0 flex items-center pl-4 pointer-events-none transition-colors",
+                      confirmPasswordTouched && !isPasswordsMatch
+                        ? "text-error group-focus-within:text-error"
+                        : "text-outline dark:text-slate-500 group-focus-within:text-primary-container dark:group-focus-within:text-primary"
+                    )}
+                  >
+                    <span className="material-symbols-outlined text-xl">lock_reset</span>
+                  </div>
+                  <input
+                    id="confirmPassword"
+                    name="confirmPassword"
+                    type={showPassword ? "text" : "password"}
+                    required
+                    value={confirmPassword}
+                    onChange={(e) => {
+                      setConfirmPassword(e.target.value);
+                      clearServerError();
+                    }}
+                    onBlur={() => setConfirmPasswordTouched(true)}
+                    placeholder="Confirmar Contraseña"
+                    className={cn(
+                      "block w-full pl-12 pr-12 py-4 rounded-lg text-on-surface dark:text-slate-100 font-body-md focus:outline-none transition-all peer placeholder-transparent",
+                      confirmPasswordTouched && !isPasswordsMatch
+                        ? "bg-error-container/20 dark:bg-red-900/20 border-2 border-error focus:ring-2 focus:ring-error focus:border-transparent"
+                        : "bg-surface-container-low dark:bg-slate-950 border border-outline-variant dark:border-slate-800 focus:ring-2 focus:ring-primary-container dark:focus:ring-primary focus:border-transparent"
+                    )}
+                  />
+                  <label
+                    htmlFor="confirmPassword"
+                    className={cn(
+                      "absolute left-12 top-4 font-body-md transition-all peer-focus:-top-2 peer-focus:text-xs peer-focus:bg-surface dark:peer-focus:bg-slate-900 peer-focus:px-1 peer-[&:not(:placeholder-shown)]:-top-2 peer-[&:not(:placeholder-shown)]:text-xs peer-[&:not(:placeholder-shown)]:bg-surface dark:peer-[&:not(:placeholder-shown)]:bg-slate-900 peer-[&:not(:placeholder-shown)]:px-1",
+                      confirmPasswordTouched && !isPasswordsMatch
+                        ? "text-error"
+                        : "text-on-surface-variant dark:text-slate-400 peer-focus:text-primary-container dark:peer-focus:text-primary"
+                    )}
+                  >
+                    Confirmar Contraseña
+                  </label>
+                  {/* Feedback visual sutil (Poka-yoke de recompensa) */}
+                  {isPasswordsMatch && confirmPassword.length > 0 && (
+                    <div className="absolute inset-y-0 right-4 flex items-center pr-2 text-green-500 animate-pulse transition-opacity duration-300 pointer-events-none">
+                      <span className="material-symbols-outlined text-xl">check_circle</span>
+                    </div>
+                  )}
+                </div>
+                {confirmPasswordTouched && !isPasswordsMatch && (
+                  <span className="text-error text-xs ml-1 font-label-md flex items-center gap-1">
+                    <span className="material-symbols-outlined text-[14px]">error</span>
+                    Las contraseñas no coinciden
+                  </span>
+                )}
+              </div>
+            )}
+
             {/* Error Hint de InsForge (ej. credenciales inválidas) */}
             {serverError && (
               <p className="font-label-md text-label-md text-error flex items-center gap-1 mt-1">
@@ -304,6 +366,7 @@ export default function AuthModal({ open, onClose }: AuthModalProps) {
                 setMode(mode === "login" ? "register" : "login");
                 setEmailTouched(false);
                 setPasswordTouched(false);
+                setConfirmPasswordTouched(false);
               }}
               className="font-label-md text-label-md text-primary-container dark:text-primary hover:text-tertiary-container dark:hover:text-tertiary hover:underline transition-colors ml-1"
             >
