@@ -30,6 +30,7 @@ export default function NewsGrid() {
             alt="Professional soccer player in blue uniform kicking a soccer ball dynamically on a green grass field during a match"
             src="https://lh3.googleusercontent.com/aida-public/AB6AXuCcYitcJfUXEEXQaOGPB9hGrXpK5QK4-3qCgzEik1DNn_X3RXWrF0nowwq1VZkBcQmuFond9GLKTfSp7Z8_QjEzafnodjSl4bu50oL8-BD9_y_GSy2foCVEMKh9AfAibnZeqalE_NXMDPoU3LpmqNPNV4IORfam8tuwTnXAtfFOMItZK9jsnxTyilIRu56xjHR7O4TqnG9vqjjjdEaH58J4u4pYoAtfjE5b4CY8dwmT0amMZQTSP4AFzBLMPSNLYgIpjkJENI3crxHc"
             fill
+            loading="lazy"
             className="object-cover group-hover:scale-105 transition-transform duration-700"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-primary via-primary/50 to-transparent opacity-90 group-hover:opacity-100 transition-opacity"></div>
@@ -59,6 +60,7 @@ export default function NewsGrid() {
               alt="Crowd of cheering sports fans in stadium seating holding scarves up in the air with dramatic lighting"
               src="https://lh3.googleusercontent.com/aida-public/AB6AXuBEDUlqS-UN_wPNJdjcrs-SY09YktysDknVlvqD4-bivNK6ubOl7K96CI05ZhrKnTYHIU9tbsKAYlaypWO6_xylx97xwNFoiAUgBkQ-6uYeYV9okI1k_6o8bLea7Ggm6yXDCPbUe0D92-bONF9u7NliMOC6QgAl-g0BGTfMj_iFv9LneNA5IZJhwxWHzyAi5Dze6BaM6j8XPWsdxQTL5ZHLXkdHMGyqjaXS0faFTxkhBWmdv2HES-3Y9n71lt2iZZFaez2UchvrkNLj"
               fill
+              loading="lazy"
               className="object-cover group-hover:scale-105 transition-transform duration-700"
             />
             <div className="absolute top-3 left-3 z-10">

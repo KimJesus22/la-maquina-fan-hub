@@ -1,7 +1,11 @@
 "use client";
 
 import { useSearchParams, useRouter, usePathname } from "next/navigation";
-import AuthModal from "./AuthModal";
+import dynamic from "next/dynamic";
+
+const AuthModal = dynamic(() => import("./AuthModal"), {
+  ssr: false, // Opcionalmente false para modales para garantizar hidratación sin mismatch
+});
 
 export default function AuthModalController() {
   const searchParams = useSearchParams();

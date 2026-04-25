@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 
 export default function HeroSection() {
   return (
@@ -9,9 +10,12 @@ export default function HeroSection() {
         <div className="absolute inset-0 opacity-20 bg-[radial-gradient(#ffffff_1px,transparent_1px)] bg-[size:24px_24px]"></div>
 
         {/* Marca de Agua del Escudo */}
-        <img
+        <Image
           alt="Escudo Cruz Azul"
           src="https://upload.wikimedia.org/wikipedia/commons/b/b5/Cruz_Azul_logo_%282022%29.svg"
+          width={800}
+          height={800}
+          priority
           className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] md:w-[800px] md:h-[800px] opacity-5 pointer-events-none"
         />
 
