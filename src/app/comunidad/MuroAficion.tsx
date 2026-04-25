@@ -32,6 +32,8 @@ export default function MuroAficion({ initialMessages, currentUserEmail }: { ini
       insforge.realtime.subscribe("chat:fan_muro").then((res) => {
         if (!res.ok) console.error("Error al suscribirse al canal:", res.error);
       });
+    }).catch((err) => {
+      console.warn("Realtime WebSocket connection timeout o error:", err);
     });
 
     // 3. Escuchar los eventos del Trigger que creamos en la Base de Datos
