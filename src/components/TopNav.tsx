@@ -9,11 +9,22 @@ import { useState } from "react";
 export default function TopNav() {
   const { user, signOut } = useAuth();
   const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   return (
     <header className="bg-white/95 dark:bg-slate-900/95 backdrop-blur-sm docked full-width top-0 sticky z-50 border-b border-slate-100 dark:border-slate-800 flat no-shadow">
-      <div className="flex justify-between items-center max-w-7xl mx-auto px-6 py-4">
+      <div className="flex justify-between items-center max-w-7xl mx-auto px-margin-mobile md:px-6 py-4">
         <div className="flex items-center gap-element-gap">
+          {/* Hamburger Menu Toggle (Mobile Only) */}
+          <button 
+            className="md:hidden text-primary dark:text-white p-2 min-h-[44px] min-w-[44px] flex items-center justify-center -ml-2"
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+          >
+            <span className="material-symbols-outlined">
+              {mobileMenuOpen ? "close" : "menu"}
+            </span>
+          </button>
+          
           <span className="font-headline-xl text-blue-800 dark:text-blue-400 font-lexend tracking-tight text-2xl font-black">
             CRUZ AZUL
           </span>
@@ -55,16 +66,16 @@ export default function TopNav() {
             <Link
               href="?auth=login"
               scroll={false}
-              className="hidden md:flex bg-primary text-on-primary font-label-md text-label-md px-6 py-2 rounded border-r-2 border-transparent hover:border-tertiary transition-all shadow-sm"
+              className="hidden md:flex bg-primary text-on-primary font-label-md text-label-md px-6 py-2 rounded min-h-[44px] items-center justify-center border-r-2 border-transparent hover:border-tertiary transition-all shadow-sm"
             >
               Únete
             </Link>
           ) : null}
-          <div className="flex gap-4">
+          <div className="flex gap-2 md:gap-4 items-center">
             <ThemeToggle />
             {user ? (
               <>
-                <button className="text-primary hover:text-primary-container dark:text-slate-400 dark:hover:text-white transition-colors duration-200">
+                <button className="text-primary hover:text-primary-container dark:text-slate-400 dark:hover:text-white transition-colors duration-200 p-2 min-h-[44px] min-w-[44px] flex items-center justify-center">
                   <span className="material-symbols-outlined" data-icon="notifications">
                     notifications
                   </span>
@@ -72,7 +83,7 @@ export default function TopNav() {
                 <div className="relative">
                   <button 
                     onClick={() => setDropdownOpen(!dropdownOpen)}
-                    className="text-primary hover:text-primary-container dark:text-slate-400 dark:hover:text-white transition-colors duration-200 flex items-center gap-2"
+                    className="text-primary hover:text-primary-container dark:text-slate-400 dark:hover:text-white transition-colors duration-200 flex items-center justify-center gap-2 p-2 min-h-[44px]"
                   >
                     <span className="material-symbols-outlined" data-icon="person">
                       person
@@ -96,7 +107,7 @@ export default function TopNav() {
                           setDropdownOpen(false);
                           signOut();
                         }}
-                        className="flex items-center gap-2 px-4 py-3 text-sm font-semibold text-tertiary-container dark:text-red-400 hover:bg-error-container/10 dark:hover:bg-red-900/20 transition-colors text-left w-full"
+                        className="flex items-center gap-2 px-4 py-3 min-h-[44px] text-sm font-semibold text-tertiary-container dark:text-red-400 hover:bg-error-container/10 dark:hover:bg-red-900/20 transition-colors text-left w-full"
                       >
                         <span className="material-symbols-outlined text-[18px]">logout</span>
                         Cerrar Sesión
@@ -109,6 +120,28 @@ export default function TopNav() {
           </div>
         </div>
       </div>
+
+      {/* Mobile Menu Content */}
+      {mobileMenuOpen && (
+        <nav className="md:hidden bg-white dark:bg-slate-900 border-b border-slate-100 dark:border-slate-800 px-margin-mobile py-4 flex flex-col gap-2">
+          <Link href="/matches" onClick={() => setMobileMenuOpen(false)} className="px-4 font-label-md text-slate-600 dark:text-slate-300 min-h-[44px] flex items-center rounded hover:bg-surface-container-low transition-colors">Partidos</Link>
+          <Link href="#" onClick={() => setMobileMenuOpen(false)} className="px-4 font-label-md text-blue-800 dark:text-blue-400 font-bold bg-blue-50 dark:bg-slate-800 rounded min-h-[44px] flex items-center">Noticias</Link>
+          <Link href="/squad" onClick={() => setMobileMenuOpen(false)} className="px-4 font-label-md text-slate-600 dark:text-slate-300 min-h-[44px] flex items-center rounded hover:bg-surface-container-low transition-colors">Plantilla</Link>
+          <Link href="#" onClick={() => setMobileMenuOpen(false)} className="px-4 font-label-md text-slate-600 dark:text-slate-300 min-h-[44px] flex items-center rounded hover:bg-surface-container-low transition-colors">Boletos</Link>
+          <Link href="/comunidad" onClick={() => setMobileMenuOpen(false)} className="px-4 font-label-md text-slate-600 dark:text-slate-300 min-h-[44px] flex items-center rounded hover:bg-surface-container-low transition-colors">Comunidad</Link>
+          
+          {!user && (
+            <Link
+              href="?auth=login"
+              onClick={() => setMobileMenuOpen(false)}
+              scroll={false}
+              className="mt-4 bg-primary text-on-primary font-label-md text-center rounded min-h-[44px] flex items-center justify-center shadow-sm"
+            >
+              Únete
+            </Link>
+          )}
+        </nav>
+      )}
     </header>
   );
 }
