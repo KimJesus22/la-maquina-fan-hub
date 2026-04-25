@@ -41,8 +41,8 @@ export default function NewsGrid() {
               Preparación intensa de cara al Clásico Joven
             </h3>
             <p className="font-body-md text-body-md text-inverse-on-surface line-clamp-2">
-              El equipo entrenó a doble sesión en La Noria, enfocados en conseguir los tres
-              puntos este fin de semana en el Estadio Azteca.
+              El equipo entrenó a doble sesión en La Noria, enfocados en conseguir los tres puntos
+              este fin de semana en el Estadio Azteca.
             </p>
             <div className="mt-4 flex items-center gap-2 text-primary-fixed-dim font-label-md text-label-md text-xs">
               <span className="material-symbols-outlined text-[16px]" data-icon="schedule">
@@ -72,8 +72,8 @@ export default function NewsGrid() {
               Venta de boletos exclusiva para Abonados
             </h3>
             <p className="font-body-md text-body-md text-secondary dark:text-slate-400 line-clamp-3 mb-4 flex-grow transition-colors duration-300">
-              Inicia la preventa especial para el próximo partido como local. Conoce los
-              horarios y zonas disponibles.
+              Inicia la preventa especial para el próximo partido como local. Conoce los horarios y
+              zonas disponibles.
             </p>
             <div className="flex items-center gap-2 text-outline font-label-md text-label-md text-xs mt-auto">
               <span className="material-symbols-outlined text-[16px]" data-icon="schedule">

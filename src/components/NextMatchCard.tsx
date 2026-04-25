@@ -50,7 +50,7 @@ export default function NextMatchCard() {
           Próximo Partido
         </h2>
       </div>
-      
+
       <div className="bg-white dark:bg-slate-900 rounded-xl border border-primary/10 dark:border-slate-800 p-gutter flex flex-col md:flex-row items-center justify-between gap-gutter shadow-sm transition-colors duration-300">
         {/* Home Team */}
         <div className="flex flex-col items-center gap-unit flex-1">
@@ -75,15 +75,13 @@ export default function NextMatchCard() {
           <span className="font-body-md text-body-md text-on-surface-variant dark:text-slate-400 transition-colors">
             Estadio Ciudad de los Deportes
           </span>
-          
+
           <div className="mt-element-gap flex gap-4">
             <div className="flex flex-col items-center">
               <span className="font-headline-lg text-headline-lg text-primary font-lexend font-bold">
                 {isMounted ? pad(timeLeft.days) : "--"}
               </span>
-              <span className="font-label-md text-label-md text-secondary text-[10px]">
-                DÍAS
-              </span>
+              <span className="font-label-md text-label-md text-secondary text-[10px]">DÍAS</span>
             </div>
             <span className="font-headline-lg text-headline-lg text-outline-variant font-lexend font-bold">
               :
@@ -92,9 +90,7 @@ export default function NextMatchCard() {
               <span className="font-headline-lg text-headline-lg text-primary font-lexend font-bold">
                 {isMounted ? pad(timeLeft.hours) : "--"}
               </span>
-              <span className="font-label-md text-label-md text-secondary text-[10px]">
-                HRS
-              </span>
+              <span className="font-label-md text-label-md text-secondary text-[10px]">HRS</span>
             </div>
             <span className="font-headline-lg text-headline-lg text-outline-variant font-lexend font-bold">
               :
@@ -103,9 +99,7 @@ export default function NextMatchCard() {
               <span className="font-headline-lg text-headline-lg text-tertiary font-lexend font-bold">
                 {isMounted ? pad(timeLeft.minutes) : "--"}
               </span>
-              <span className="font-label-md text-label-md text-secondary text-[10px]">
-                MIN
-              </span>
+              <span className="font-label-md text-label-md text-secondary text-[10px]">MIN</span>
             </div>
           </div>
         </div>

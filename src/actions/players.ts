@@ -1,7 +1,7 @@
 "use server";
 
 import { insforge } from "@/lib/insforge";
-import type { Player } from "@/lib/types";
+import type { Player } from "@/types";
 
 /**
  * Obtiene todos los jugadores de la base de datos InsForge.

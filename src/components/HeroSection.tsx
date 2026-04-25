@@ -5,17 +5,16 @@ export default function HeroSection() {
     <section className="relative min-h-[819px] flex items-center justify-center overflow-hidden">
       {/* Fondo Premium y Gradiente */}
       <div className="absolute inset-0 z-0 bg-primary dark:bg-slate-900 bg-gradient-to-br from-primary via-primary-container to-primary dark:from-slate-900 dark:via-slate-800 dark:to-slate-900 transition-colors duration-300">
-        
         {/* Textura Técnica (Malla Deportiva) */}
         <div className="absolute inset-0 opacity-20 bg-[radial-gradient(#ffffff_1px,transparent_1px)] bg-[size:24px_24px]"></div>
-        
+
         {/* Marca de Agua del Escudo */}
         <img
           alt="Escudo Cruz Azul"
           src="https://upload.wikimedia.org/wikipedia/commons/b/b5/Cruz_Azul_logo_%282022%29.svg"
           className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] md:w-[800px] md:h-[800px] opacity-5 pointer-events-none"
         />
-        
+
         {/* Sombra inferior para fundirse con la siguiente sección */}
         <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-background dark:from-slate-950 to-transparent transition-colors duration-300"></div>
       </div>

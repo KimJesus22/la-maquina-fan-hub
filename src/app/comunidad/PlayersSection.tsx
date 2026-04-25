@@ -5,11 +5,7 @@ export default async function PlayersSection() {
   const players = await getSquadPlayers();
 
   if (players.length === 0) {
-    return (
-      <p className="py-8 text-center text-sm text-zinc-500">
-        No hay jugadores registrados.
-      </p>
-    );
+    return <p className="py-8 text-center text-sm text-zinc-500">No hay jugadores registrados.</p>;
   }
 
   return (

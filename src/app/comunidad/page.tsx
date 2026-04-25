@@ -29,12 +29,9 @@ export default async function ComunidadPage() {
             priority
           />
           <div>
-            <h1 className="text-3xl font-bold tracking-tight text-white">
-              Comunidad Cruz Azul
-            </h1>
+            <h1 className="text-3xl font-bold tracking-tight text-white">Comunidad Cruz Azul</h1>
             <p className="mt-1 text-sm text-zinc-400">
-              Bienvenido,{" "}
-              <span className="font-medium text-blue-400">{session.email}</span>
+              Bienvenido, <span className="font-medium text-blue-400">{session.email}</span>
             </p>
           </div>
         </div>
@@ -53,9 +50,7 @@ export default async function ComunidadPage() {
       <div className="grid gap-10 lg:grid-cols-5">
         {/* Plantilla (3/5) */}
         <section className="lg:col-span-3">
-          <h2 className="mb-5 text-lg font-semibold text-white">
-            ⚽ Plantilla
-          </h2>
+          <h2 className="mb-5 text-lg font-semibold text-white">⚽ Plantilla</h2>
           <Suspense fallback={<Loading />}>
             <PlayersSection />
           </Suspense>
@@ -63,9 +58,7 @@ export default async function ComunidadPage() {
 
         {/* Partidos (2/5) */}
         <section className="lg:col-span-2">
-          <h2 className="mb-5 text-lg font-semibold text-white">
-            📅 Próximos Partidos
-          </h2>
+          <h2 className="mb-5 text-lg font-semibold text-white">📅 Próximos Partidos</h2>
           <Suspense fallback={<Loading />}>
             <MatchesSection />
           </Suspense>
@@ -75,7 +68,7 @@ export default async function ComunidadPage() {
       {/* Fila de Muro de Afición */}
       <section className="mt-4">
         <h2 className="mb-5 text-lg font-semibold text-white flex items-center gap-2">
-          <span className="material-symbols-outlined">forum</span> 
+          <span className="material-symbols-outlined">forum</span>
           Muro de la Afición
         </h2>
         <MuroAficion initialMessages={recentMessages} currentUserEmail={session.email} />

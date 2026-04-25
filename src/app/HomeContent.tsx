@@ -18,9 +18,7 @@ export default function HomeContent() {
 
   return (
     <main className="flex flex-1 flex-col items-center justify-center gap-6">
-      <h1 className="text-3xl font-bold tracking-tight text-foreground">
-        Cruz Azul
-      </h1>
+      <h1 className="text-3xl font-bold tracking-tight text-foreground">Cruz Azul</h1>
       <p className="text-zinc-400">Plataforma de gestión integral</p>
 
       <button

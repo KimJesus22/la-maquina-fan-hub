@@ -28,9 +28,7 @@ export async function encrypt(payload: SessionPayload): Promise<string> {
 
 /* ── Descifrado ────────────────────────────────────────── */
 
-export async function decrypt(
-  token: string | undefined = ""
-): Promise<SessionPayload | null> {
+export async function decrypt(token: string | undefined = ""): Promise<SessionPayload | null> {
   try {
     const { payload } = await jwtVerify(token, encodedKey, {
       algorithms: ["HS256"],

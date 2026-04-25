@@ -11,11 +11,7 @@ const SESSION_DURATION_MS = 7 * 24 * 60 * 60 * 1000; // 7 días
 
 /* ── Crear sesión ──────────────────────────────────────── */
 
-export async function createSession(
-  userId: string,
-  email: string,
-  accessToken: string
-) {
+export async function createSession(userId: string, email: string, accessToken: string) {
   const expiresAt = new Date(Date.now() + SESSION_DURATION_MS);
 
   const session = await encrypt({

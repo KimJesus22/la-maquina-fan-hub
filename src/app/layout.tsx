@@ -18,7 +18,8 @@ export const metadata: Metadata = {
     template: "%s | Cruz Azul Fan Portal",
     default: "Cruz Azul Fan Portal",
   },
-  description: "La Pasión Nos Une. El portal definitivo para aficionados de La Máquina con noticias y resultados en tiempo real.",
+  description:
+    "La Pasión Nos Une. El portal definitivo para aficionados de La Máquina con noticias y resultados en tiempo real.",
   openGraph: {
     title: "Cruz Azul Fan Portal",
     description: "La Pasión Nos Une. El portal definitivo para aficionados de La Máquina.",
@@ -58,9 +59,7 @@ export default async function RootLayout({
       <body className="bg-background text-on-background dark:bg-slate-950 dark:text-slate-100 transition-colors duration-300">
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           <AuthProvider initialSession={session}>
-            <main className="flex-1 flex flex-col min-h-screen">
-              {children}
-            </main>
+            <main className="flex-1 flex flex-col min-h-screen">{children}</main>
           </AuthProvider>
         </ThemeProvider>
       </body>

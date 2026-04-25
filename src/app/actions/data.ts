@@ -1,7 +1,7 @@
 "use server";
 
 import { insforge } from "@/lib/insforge";
-import type { Player, Match } from "@/lib/types";
+import type { Player, Match } from "@/types";
 
 /* ── Players ───────────────────────────────────────────── */
 

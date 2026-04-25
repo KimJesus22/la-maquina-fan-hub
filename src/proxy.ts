@@ -11,9 +11,7 @@ const protectedPrefixes = ["/comunidad"];
 export async function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
-  const isProtected = protectedPrefixes.some((prefix) =>
-    pathname.startsWith(prefix)
-  );
+  const isProtected = protectedPrefixes.some((prefix) => pathname.startsWith(prefix));
 
   if (!isProtected) {
     return NextResponse.next();
@@ -36,7 +34,5 @@ export async function proxy(request: NextRequest) {
 
 // Ejecutar solo en las rutas relevantes (excluir assets estáticos)
 export const config = {
-  matcher: [
-    "/((?!api|_next/static|_next/image|favicon.ico|sitemap.xml|robots.txt).*)",
-  ],
+  matcher: ["/((?!api|_next/static|_next/image|favicon.ico|sitemap.xml|robots.txt).*)"],
 };

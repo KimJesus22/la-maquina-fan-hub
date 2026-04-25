@@ -14,8 +14,12 @@ export default async function MatchesPage() {
       <TopNav />
       <main className="flex-grow pt-12 pb-section-gap px-4 md:px-8 max-w-[1280px] mx-auto w-full">
         <header className="mb-12 text-center md:text-left">
-          <h1 className="font-headline-xl text-headline-xl text-primary mb-2 uppercase font-lexend font-bold tracking-tight">Calendario de Partidos</h1>
-          <p className="font-body-lg text-body-lg text-on-surface-variant">Sigue la ruta de La Máquina en la temporada 2026.</p>
+          <h1 className="font-headline-xl text-headline-xl text-primary mb-2 uppercase font-lexend font-bold tracking-tight">
+            Calendario de Partidos
+          </h1>
+          <p className="font-body-lg text-body-lg text-on-surface-variant">
+            Sigue la ruta de La Máquina en la temporada 2026.
+          </p>
         </header>
 
         {matches.length === 0 ? (
@@ -26,7 +30,7 @@ export default async function MatchesPage() {
           />
         ) : (
           <div className="relative border-l-2 border-surface-variant dark:border-slate-800 ml-4 md:ml-8 pl-8 md:pl-12 space-y-12">
-            {matches.map(match => (
+            {matches.map((match) => (
               <MatchTimelineItem key={match.id} match={match} />
             ))}
           </div>

@@ -6,7 +6,8 @@ import { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Primer Equipo",
-  description: "Conoce a la plantilla oficial de Cruz Azul para la presente temporada. Porteros, Defensas, Medios y Delanteros.",
+  description:
+    "Conoce a la plantilla oficial de Cruz Azul para la presente temporada. Porteros, Defensas, Medios y Delanteros.",
 };
 
 export const revalidate = 3600;

@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import type { Player } from "@/lib/types";
+import type { Player } from "@/types";
 import PlayerCard from "@/components/PlayerCard";
 import EmptyState from "@/components/EmptyState";
 
@@ -11,15 +11,18 @@ export default function SquadClient({ players }: { players: Player[] }) {
   const filters = ["Todos", "Porteros", "Defensas", "Medios", "Delanteros"];
 
   // Lógica del cliente para filtrar los jugadores
-  const filteredPlayers = players.filter(player => {
+  const filteredPlayers = players.filter((player) => {
     if (filter === "Todos") return true;
-    
+
     const pos = player.position.toLowerCase();
     if (filter === "Porteros") return pos.includes("portero") || pos.includes("arquero");
-    if (filter === "Defensas") return pos.includes("defensa") || pos.includes("lateral") || pos.includes("central");
-    if (filter === "Medios") return pos.includes("medio") || pos.includes("volante") || pos.includes("contención");
-    if (filter === "Delanteros") return pos.includes("delantero") || pos.includes("extremo") || pos.includes("punta");
-    
+    if (filter === "Defensas")
+      return pos.includes("defensa") || pos.includes("lateral") || pos.includes("central");
+    if (filter === "Medios")
+      return pos.includes("medio") || pos.includes("volante") || pos.includes("contención");
+    if (filter === "Delanteros")
+      return pos.includes("delantero") || pos.includes("extremo") || pos.includes("punta");
+
     return true;
   });
 
@@ -27,18 +30,20 @@ export default function SquadClient({ players }: { players: Player[] }) {
     <>
       <header className="mb-12 text-center md:text-left flex flex-col md:flex-row justify-between items-end gap-6 border-b border-surface-variant pb-6">
         <div>
-          <h1 className="font-headline-xl text-headline-xl text-primary mb-2 uppercase tracking-tight font-lexend font-bold">Primer Equipo</h1>
+          <h1 className="font-headline-xl text-headline-xl text-primary mb-2 uppercase tracking-tight font-lexend font-bold">
+            Primer Equipo
+          </h1>
           <p className="font-body-lg text-body-lg text-on-surface-variant">Temporada 2026</p>
         </div>
-        
+
         <div className="flex flex-wrap gap-2 justify-center md:justify-end w-full md:w-auto">
-          {filters.map(f => (
+          {filters.map((f) => (
             <button
               key={f}
               onClick={() => setFilter(f)}
               className={`px-4 py-2 font-label-md text-label-md transition-all rounded ${
-                filter === f 
-                  ? "bg-primary text-on-primary shadow-md" 
+                filter === f
+                  ? "bg-primary text-on-primary shadow-md"
                   : "bg-surface text-on-surface border border-outline-variant hover:border-primary"
               }`}
             >
@@ -50,12 +55,17 @@ export default function SquadClient({ players }: { players: Player[] }) {
 
       <section className="mb-section-gap">
         <h2 className="font-headline-lg text-headline-lg text-primary mb-6 flex items-center gap-3 font-lexend font-bold">
-          <span className="material-symbols-outlined text-tertiary-container" style={{ fontVariationSettings: "'FILL' 1" }}>sports_soccer</span>
+          <span
+            className="material-symbols-outlined text-tertiary-container"
+            style={{ fontVariationSettings: "'FILL' 1" }}
+          >
+            sports_soccer
+          </span>
           {filter === "Todos" ? "Plantilla Completa" : filter}
         </h2>
-        
+
         {filteredPlayers.length === 0 ? (
-          <EmptyState 
+          <EmptyState
             icon="group_off"
             title="Sin Jugadores"
             description={`No hay jugadores registrados en la categoría "${filter}".`}
@@ -70,7 +80,7 @@ export default function SquadClient({ players }: { players: Player[] }) {
           />
         ) : (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {filteredPlayers.map(player => (
+            {filteredPlayers.map((player) => (
               <PlayerCard key={player.id} player={player} />
             ))}
           </div>

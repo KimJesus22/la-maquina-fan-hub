@@ -6,12 +6,12 @@ import { insforge } from "@/lib/insforge";
 export async function GET(request: NextRequest) {
   // 1. Capa de Seguridad: Verificar el secreto del Cron Job
   const authHeader = request.headers.get("authorization");
-  
+
   if (authHeader !== `Bearer ${process.env.CRON_SECRET}`) {
-    return new NextResponse(
-      JSON.stringify({ error: "Acceso denegado: Token CRON inválido" }),
-      { status: 401, headers: { "Content-Type": "application/json" } }
-    );
+    return new NextResponse(JSON.stringify({ error: "Acceso denegado: Token CRON inválido" }), {
+      status: 401,
+      headers: { "Content-Type": "application/json" },
+    });
   }
 
   try {
@@ -27,10 +27,11 @@ export async function GET(request: NextRequest) {
         </tbody>
       </table>
     `;
-    
+
     // Cargamos el HTML en Cheerio (similar a usar jQuery)
     const $ = cheerio.load(mockHtml);
-    const scrapedPlayers: Array<{ name: string, goals: number, assists: number, matches: number }> = [];
+    const scrapedPlayers: Array<{ name: string; goals: number; assists: number; matches: number }> =
+      [];
 
     // Iteramos sobre las filas de la tabla de estadísticas
     $("table.sports-stats-table tbody tr").each((_, element) => {
@@ -46,22 +47,23 @@ export async function GET(request: NextRequest) {
 
     // 3. Actualización de InsForge
     let updatedCount = 0;
-    
+
     // Obtenemos los jugadores actuales para hacer el cruce de IDs
     const { data: currentPlayers, error: fetchError } = await insforge.database
       .from("players")
       .select("id, name");
-      
+
     if (fetchError) throw fetchError;
-    
+
     if (currentPlayers) {
       for (const scraped of scrapedPlayers) {
         // Encontramos la coincidencia del jugador en la DB
-        const playerMatch = currentPlayers.find(p => 
-          p.name.toLowerCase().includes(scraped.name.toLowerCase()) || 
-          scraped.name.toLowerCase().includes(p.name.toLowerCase())
+        const playerMatch = currentPlayers.find(
+          (p) =>
+            p.name.toLowerCase().includes(scraped.name.toLowerCase()) ||
+            scraped.name.toLowerCase().includes(p.name.toLowerCase())
         );
-        
+
         if (playerMatch) {
           // Ejecutamos la actualización
           const { error: updateError } = await insforge.database
@@ -69,10 +71,10 @@ export async function GET(request: NextRequest) {
             .update({
               goals: scraped.goals,
               assists: scraped.assists,
-              matches_played: scraped.matches
+              matches_played: scraped.matches,
             })
             .eq("id", playerMatch.id);
-            
+
           if (!updateError) {
             updatedCount++;
           }
@@ -80,16 +82,15 @@ export async function GET(request: NextRequest) {
       }
     }
 
-    return NextResponse.json({ 
-      success: true, 
-      message: `Scraping completado. ${updatedCount} jugadores actualizados.` 
+    return NextResponse.json({
+      success: true,
+      message: `Scraping completado. ${updatedCount} jugadores actualizados.`,
     });
-
   } catch (error) {
     console.error("Error crítico durante el Scraping Cron:", error);
-    return new NextResponse(
-      JSON.stringify({ error: "Fallo interno en el scraper" }), 
-      { status: 500, headers: { "Content-Type": "application/json" } }
-    );
+    return new NextResponse(JSON.stringify({ error: "Fallo interno en el scraper" }), {
+      status: 500,
+      headers: { "Content-Type": "application/json" },
+    });
   }
 }

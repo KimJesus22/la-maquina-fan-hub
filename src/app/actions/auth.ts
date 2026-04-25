@@ -13,10 +13,7 @@ export interface AuthState {
 
 /* ── Sign Up ───────────────────────────────────────────── */
 
-export async function signUp(
-  _prev: AuthState | undefined,
-  formData: FormData
-): Promise<AuthState> {
+export async function signUp(_prev: AuthState | undefined, formData: FormData): Promise<AuthState> {
   const email = formData.get("email") as string;
   const password = formData.get("password") as string;
   const name = formData.get("name") as string | null;
@@ -33,7 +30,10 @@ export async function signUp(
 
   if (error) {
     let msg = error.message ?? "Error al crear la cuenta.";
-    if (error.message.includes("User already registered") || error.message.includes("already exists")) {
+    if (
+      error.message.includes("User already registered") ||
+      error.message.includes("already exists")
+    ) {
       msg = "Este correo ya pertenece a la comunidad, intenta iniciar sesión.";
     }
     return { error: msg };
@@ -57,10 +57,7 @@ export async function signUp(
 
 /* ── Sign In ───────────────────────────────────────────── */
 
-export async function signIn(
-  _prev: AuthState | undefined,
-  formData: FormData
-): Promise<AuthState> {
+export async function signIn(_prev: AuthState | undefined, formData: FormData): Promise<AuthState> {
   const email = formData.get("email") as string;
   const password = formData.get("password") as string;
 

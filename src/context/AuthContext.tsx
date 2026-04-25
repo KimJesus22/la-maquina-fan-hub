@@ -11,15 +11,15 @@ interface AuthContextType {
   signOut: () => Promise<void>;
 }
 
-const AuthContext = createContext<AuthContextType>({ 
+const AuthContext = createContext<AuthContextType>({
   user: null,
-  signOut: async () => {}
+  signOut: async () => {},
 });
 
-export function AuthProvider({ 
-  children, 
-  initialSession 
-}: { 
+export function AuthProvider({
+  children,
+  initialSession,
+}: {
   children: ReactNode;
   initialSession: SessionPayload | null;
 }) {
@@ -28,15 +28,20 @@ export function AuthProvider({
 
   useEffect(() => {
     // 1. Sincroniza con el estado del Server Component (Layout)
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setUser(initialSession);
 
     // 2. Si el SDK de InsForge expone un listener estilo Supabase (onAuthStateChange),
     // nos suscribimos para actualizaciones en tiempo real entre pestañas.
     let unsubscribe: (() => void) | undefined;
-    
-    if (typeof (insforge.auth as any).onAuthStateChange === 'function') {
-      const { data } = (insforge.auth as any).onAuthStateChange((event: string, session: any) => {
-        if (event === 'SIGNED_OUT') setUser(null);
+
+    const authService = insforge.auth as unknown as {
+      onAuthStateChange?: (cb: (event: string) => void) => { data: { subscription: { unsubscribe: () => void } } };
+    };
+
+    if (typeof authService.onAuthStateChange === "function") {
+      const { data } = authService.onAuthStateChange((event: string) => {
+        if (event === "SIGNED_OUT") setUser(null);
         // Nota: Para SIGNED_IN, dependemos de que el Server Action recargue la página o actualice la cookie
       });
       unsubscribe = data?.subscription?.unsubscribe;
@@ -50,18 +55,16 @@ export function AuthProvider({
   const handleSignOut = async () => {
     // Limpieza de estado local inmediato para UX optimista
     setUser(null);
-    
+
     // Llamada al Server Action para destruir token de InsForge y la cookie segura
     await serverSignOut();
-    
+
     // Redirección forzada al landing page
     router.push("/");
   };
 
   return (
-    <AuthContext.Provider value={{ user, signOut: handleSignOut }}>
-      {children}
-    </AuthContext.Provider>
+    <AuthContext.Provider value={{ user, signOut: handleSignOut }}>{children}</AuthContext.Provider>
   );
 }
 

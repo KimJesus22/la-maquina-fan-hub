@@ -1,31 +1,37 @@
-import type { Match } from "@/lib/types";
+import type { Match } from "@/types";
 import { cn } from "@/lib/cn";
 
 export default function MatchTimelineItem({ match }: { match: Match }) {
   // Determinamos el rol de Cruz Azul en el partido
   const isCruzAzulLocal = match.equipo_local.toLowerCase().includes("cruz azul");
   const isFinished = match.estatus === "finalizado";
-  
+
   // Formateamos la fecha al estilo: "sáb, 21 oct - 19:00"
   const dateObj = new Date(match.fecha);
-  const formattedDate = new Intl.DateTimeFormat('es-MX', {
-    weekday: 'short',
-    day: 'numeric',
-    month: 'short',
-    hour: '2-digit',
-    minute: '2-digit'
-  }).format(dateObj).replace('.', ''); // Remueve posibles puntos de abreviación
+  const formattedDate = new Intl.DateTimeFormat("es-MX", {
+    weekday: "short",
+    day: "numeric",
+    month: "short",
+    hour: "2-digit",
+    minute: "2-digit",
+  })
+    .format(dateObj)
+    .replace(".", ""); // Remueve posibles puntos de abreviación
 
   return (
-    <article className={cn(
-      "relative border border-outline-variant rounded-lg p-element-gap transition-colors shadow-none",
-      isFinished ? "bg-surface-container-low opacity-80" : "bg-surface-container-lowest"
-    )}>
+    <article
+      className={cn(
+        "relative border border-outline-variant rounded-lg p-element-gap transition-colors shadow-none",
+        isFinished ? "bg-surface-container-low opacity-80" : "bg-surface-container-lowest"
+      )}
+    >
       {/* Timeline Dot (Rojo para local a futuro, Gris suave para visitante, Gris oscuro si finalizó) */}
-      <div className={cn(
-        "absolute -left-[35px] md:-left-[51px] top-6 w-4 h-4 rounded-full border-4 border-surface-container-lowest z-10",
-        isFinished ? "bg-outline" : (isCruzAzulLocal ? "bg-tertiary" : "bg-outline-variant")
-      )}></div>
+      <div
+        className={cn(
+          "absolute -left-[35px] md:-left-[51px] top-6 w-4 h-4 rounded-full border-4 border-surface-container-lowest z-10",
+          isFinished ? "bg-outline" : isCruzAzulLocal ? "bg-tertiary" : "bg-outline-variant"
+        )}
+      ></div>
 
       <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-element-gap">
         <div className="flex-1 w-full">
@@ -34,12 +40,14 @@ export default function MatchTimelineItem({ match }: { match: Match }) {
             <span className="font-label-md text-label-md text-on-surface-variant bg-surface-container px-2 py-1 rounded capitalize">
               {formattedDate}
             </span>
-            <span className={cn(
-              "font-label-md text-label-md px-2 py-1 rounded",
-              isCruzAzulLocal 
-                ? "bg-primary text-on-primary" 
-                : "bg-surface-container-lowest text-primary border border-primary"
-            )}>
+            <span
+              className={cn(
+                "font-label-md text-label-md px-2 py-1 rounded",
+                isCruzAzulLocal
+                  ? "bg-primary text-on-primary"
+                  : "bg-surface-container-lowest text-primary border border-primary"
+              )}
+            >
               {isCruzAzulLocal ? "Local" : "Visitante"}
             </span>
             {isFinished && (
@@ -54,12 +62,16 @@ export default function MatchTimelineItem({ match }: { match: Match }) {
             {/* Local */}
             <div className="flex flex-col items-center">
               <div className="w-16 h-16 bg-surface-container rounded-full flex items-center justify-center border border-surface-variant overflow-hidden">
-                <span className="material-symbols-outlined text-2xl text-slate-400">sports_soccer</span>
+                <span className="material-symbols-outlined text-2xl text-slate-400">
+                  sports_soccer
+                </span>
               </div>
-              <span className={cn(
-                "font-label-md text-label-md mt-2",
-                isCruzAzulLocal ? "text-primary" : "text-on-surface"
-              )}>
+              <span
+                className={cn(
+                  "font-label-md text-label-md mt-2",
+                  isCruzAzulLocal ? "text-primary" : "text-on-surface"
+                )}
+              >
                 {match.equipo_local}
               </span>
             </div>
@@ -72,18 +84,24 @@ export default function MatchTimelineItem({ match }: { match: Match }) {
                 </span>
               </div>
             ) : (
-              <span className="font-headline-md text-headline-md text-outline-variant px-4">VS</span>
+              <span className="font-headline-md text-headline-md text-outline-variant px-4">
+                VS
+              </span>
             )}
 
             {/* Visitante */}
             <div className="flex flex-col items-center">
               <div className="w-16 h-16 bg-surface-container rounded-full flex items-center justify-center border border-surface-variant overflow-hidden">
-                <span className="material-symbols-outlined text-2xl text-slate-400">sports_soccer</span>
+                <span className="material-symbols-outlined text-2xl text-slate-400">
+                  sports_soccer
+                </span>
               </div>
-              <span className={cn(
-                "font-label-md text-label-md mt-2",
-                !isCruzAzulLocal ? "text-primary" : "text-on-surface"
-              )}>
+              <span
+                className={cn(
+                  "font-label-md text-label-md mt-2",
+                  !isCruzAzulLocal ? "text-primary" : "text-on-surface"
+                )}
+              >
                 {match.equipo_visitante}
               </span>
             </div>

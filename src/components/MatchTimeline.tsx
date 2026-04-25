@@ -1,5 +1,5 @@
 import { cn } from "@/lib/cn";
-import type { Match } from "@/lib/types";
+import type { Match } from "@/types";
 
 /* ── Resultado helpers ─────────────────────────────────── */
 
@@ -39,11 +39,7 @@ interface MatchTimelineProps {
 
 export default function MatchTimeline({ matches }: MatchTimelineProps) {
   if (matches.length === 0) {
-    return (
-      <p className="py-8 text-center text-sm text-zinc-500">
-        No hay partidos para mostrar.
-      </p>
-    );
+    return <p className="py-8 text-center text-sm text-zinc-500">No hay partidos para mostrar.</p>;
   }
 
   return (
@@ -94,9 +90,7 @@ export default function MatchTimeline({ matches }: MatchTimelineProps) {
               <div className="flex items-center justify-between gap-3">
                 <div className="min-w-0 flex-1">
                   <div className="flex items-center gap-2">
-                    <h4 className="truncate text-sm font-semibold text-white">
-                      vs {opponent}
-                    </h4>
+                    <h4 className="truncate text-sm font-semibold text-white">vs {opponent}</h4>
                     <span className="shrink-0 rounded-md bg-zinc-800 px-1.5 py-0.5 text-[0.6rem] font-medium text-zinc-400">
                       {venueLabel}
                     </span>

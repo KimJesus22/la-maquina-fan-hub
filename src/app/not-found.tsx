@@ -26,9 +26,10 @@ export default function NotFound() {
         <h2 className="font-headline-lg text-headline-lg text-on-surface dark:text-white uppercase tracking-wider font-lexend font-bold mb-4">
           ¡Fuera de lugar!
         </h2>
-        
+
         <p className="font-body-lg text-body-lg text-on-surface-variant dark:text-slate-400 mb-8">
-          El árbitro ha pitado. La página que buscas no existe o ha sido movida a otro estadio. Regresemos al terreno de juego oficial.
+          El árbitro ha pitado. La página que buscas no existe o ha sido movida a otro estadio.
+          Regresemos al terreno de juego oficial.
         </p>
 
         {/* Botones de acción */}

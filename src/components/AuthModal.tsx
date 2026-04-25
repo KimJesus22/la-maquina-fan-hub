@@ -33,14 +33,15 @@ export default function AuthModal({ open, onClose }: AuthModalProps) {
 
   const isValidEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
   const isValidPassword = password.length >= 8;
-  const isPasswordsMatch = mode === "register" ? password === confirmPassword && confirmPassword.length > 0 : true;
+  const isPasswordsMatch =
+    mode === "register" ? password === confirmPassword && confirmPassword.length > 0 : true;
   const isFormValid = isValidEmail && isValidPassword && isPasswordsMatch;
 
   // Estados asíncronos para interactuar con Server Actions (InsForge)
-  const [loginState, loginAction, loginPending] = useActionState<
-    AuthState | undefined,
-    FormData
-  >(signIn, undefined);
+  const [loginState, loginAction, loginPending] = useActionState<AuthState | undefined, FormData>(
+    signIn,
+    undefined
+  );
 
   const [registerState, registerAction, registerPending] = useActionState<
     AuthState | undefined,
@@ -82,7 +83,9 @@ export default function AuthModal({ open, onClose }: AuthModalProps) {
           className="absolute top-4 right-4 text-outline dark:text-slate-400 hover:text-on-surface dark:hover:text-white transition-colors p-2 rounded-full hover:bg-surface-variant dark:hover:bg-slate-800 z-10 focus:outline-none focus:ring-2 focus:ring-primary-container focus:ring-offset-2"
           aria-label="Cerrar ventana emergente"
         >
-          <span className="material-symbols-outlined" aria-hidden="true">close</span>
+          <span className="material-symbols-outlined" aria-hidden="true">
+            close
+          </span>
         </button>
 
         {/* Header */}
@@ -173,7 +176,9 @@ export default function AuthModal({ open, onClose }: AuthModalProps) {
               </div>
               {emailTouched && !isValidEmail && (
                 <span className="text-error text-xs ml-1 font-label-md flex items-center gap-1">
-                  <span className="material-symbols-outlined text-[14px]" aria-hidden="true">error</span>
+                  <span className="material-symbols-outlined text-[14px]" aria-hidden="true">
+                    error
+                  </span>
                   Ingresa un correo válido (ej: aficionado@cruzazul.mx)
                 </span>
               )}
@@ -241,13 +246,17 @@ export default function AuthModal({ open, onClose }: AuthModalProps) {
                 {/* Feedback visual sutil (Poka-yoke de recompensa) */}
                 {isValidPassword && (
                   <div className="absolute inset-y-0 right-10 flex items-center pr-2 text-green-500 animate-pulse transition-opacity duration-300 pointer-events-none">
-                    <span className="material-symbols-outlined text-xl" aria-hidden="true">check_circle</span>
+                    <span className="material-symbols-outlined text-xl" aria-hidden="true">
+                      check_circle
+                    </span>
                   </div>
                 )}
               </div>
               {passwordTouched && !isValidPassword && (
                 <span className="text-error text-xs ml-1 font-label-md flex items-center gap-1">
-                  <span className="material-symbols-outlined text-[14px]" aria-hidden="true">error</span>
+                  <span className="material-symbols-outlined text-[14px]" aria-hidden="true">
+                    error
+                  </span>
                   Debe tener al menos 8 caracteres
                 </span>
               )}
@@ -299,13 +308,17 @@ export default function AuthModal({ open, onClose }: AuthModalProps) {
                   {/* Feedback visual sutil (Poka-yoke de recompensa) */}
                   {isPasswordsMatch && confirmPassword.length > 0 && (
                     <div className="absolute inset-y-0 right-4 flex items-center pr-2 text-green-500 animate-pulse transition-opacity duration-300 pointer-events-none">
-                      <span className="material-symbols-outlined text-xl" aria-hidden="true">check_circle</span>
+                      <span className="material-symbols-outlined text-xl" aria-hidden="true">
+                        check_circle
+                      </span>
                     </div>
                   )}
                 </div>
                 {confirmPasswordTouched && !isPasswordsMatch && (
                   <span className="text-error text-xs ml-1 font-label-md flex items-center gap-1">
-                    <span className="material-symbols-outlined text-[14px]" aria-hidden="true">error</span>
+                    <span className="material-symbols-outlined text-[14px]" aria-hidden="true">
+                      error
+                    </span>
                     Las contraseñas no coinciden
                   </span>
                 )}
@@ -314,7 +327,10 @@ export default function AuthModal({ open, onClose }: AuthModalProps) {
 
             {/* Error Hint de InsForge (ej. credenciales inválidas) */}
             {serverError && (
-              <p className="font-label-md text-label-md text-error flex items-center gap-1 mt-1" role="alert">
+              <p
+                className="font-label-md text-label-md text-error flex items-center gap-1 mt-1"
+                role="alert"
+              >
                 <span className="material-symbols-outlined text-[14px]" aria-hidden="true">
                   error
                 </span>
@@ -351,9 +367,7 @@ export default function AuthModal({ open, onClose }: AuthModalProps) {
                 : mode === "login"
                   ? "Iniciar Sesión"
                   : "Crear Cuenta"}
-              {!isPending && (
-                <span className="material-symbols-outlined">arrow_forward</span>
-              )}
+              {!isPending && <span className="material-symbols-outlined">arrow_forward</span>}
               {isPending && <Spinner />}
             </button>
           </form>
@@ -392,14 +406,7 @@ function Spinner() {
       fill="none"
       viewBox="0 0 24 24"
     >
-      <circle
-        className="opacity-25"
-        cx="12"
-        cy="12"
-        r="10"
-        stroke="currentColor"
-        strokeWidth="4"
-      />
+      <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
       <path
         className="opacity-75"
         fill="currentColor"

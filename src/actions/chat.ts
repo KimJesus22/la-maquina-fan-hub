@@ -22,7 +22,7 @@ export async function sendFanMessage(formData: FormData) {
     const timeLeft = Math.ceil((RATE_LIMIT_WINDOW - (now - lastMessageTime)) / 1000);
     return { error: `Espera ${timeLeft}s antes de enviar otro mensaje.` };
   }
-  
+
   // Registrar tiempo del intento
   rateLimitMap.set(userId, now);
 
@@ -34,25 +34,25 @@ export async function sendFanMessage(formData: FormData) {
   // Extraer el username a partir del correo electrónico
   const username = session.email.split("@")[0];
 
-  const { error } = await insforge.database
-    .from("fan_messages")
-    .insert([{
+  const { error } = await insforge.database.from("fan_messages").insert([
+    {
       user_id: session.id || session.email,
       username: username,
-      message: message.trim()
-    }]);
+      message: message.trim(),
+    },
+  ]);
 
   if (error) {
     console.error("Error enviando mensaje:", error);
     return { error: "Error al enviar el mensaje" };
   }
-  
+
   return { success: true };
 }
 
 export async function getRecentMessages() {
   const session = await getSession();
-  
+
   if (!session?.accessToken) {
     console.error("No hay sesión para leer mensajes (RLS activo).");
     return [];
@@ -64,11 +64,11 @@ export async function getRecentMessages() {
       {
         method: "GET",
         headers: {
-          "apikey": process.env.NEXT_PUBLIC_INSFORGE_ANON_KEY!,
-          "Authorization": `Bearer ${session.accessToken}`,
-          "Content-Type": "application/json"
+          apikey: process.env.NEXT_PUBLIC_INSFORGE_ANON_KEY!,
+          Authorization: `Bearer ${session.accessToken}`,
+          "Content-Type": "application/json",
         },
-        cache: "no-store" // Desactivar cacheo para el chat en tiempo real
+        cache: "no-store", // Desactivar cacheo para el chat en tiempo real
       }
     );
 
