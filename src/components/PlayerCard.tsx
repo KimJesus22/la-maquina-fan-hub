@@ -8,8 +8,13 @@ export default function PlayerCard({ player }: { player: Player }) {
   const lastName = nameParts.length > 1 ? nameParts.slice(1).join(" ") : "";
 
   return (
-    <article className="bg-surface border border-outline-variant/30 hover:border-primary/50 transition-all duration-300 hover:shadow-[0_4px_20px_-4px_rgba(0,48,99,0.15)] group relative overflow-hidden flex flex-col h-full">
-      <div className="absolute top-0 right-0 w-16 h-16 bg-primary/5 rounded-bl-full -z-0"></div>
+    <article className="bg-surface rounded-xl border border-outline-variant/30 shadow-md hover:shadow-xl hover:-translate-y-1 hover:border-primary/50 transition-all duration-300 group relative overflow-hidden flex flex-col h-full">
+      <div className="absolute top-0 right-0 w-16 h-16 bg-primary/5 rounded-bl-full z-0"></div>
+      
+      {/* Marca de agua (Watermark) del número de jugador */}
+      <div className="absolute -top-4 -left-4 text-[120px] leading-none font-black text-primary/5 dark:text-white/5 select-none z-0 tracking-tighter">
+        {player.number}
+      </div>
       
       {/* Top Section */}
       <div className="p-6 pb-0 flex-grow relative z-10 text-center flex flex-col items-center">
@@ -28,10 +33,6 @@ export default function PlayerCard({ player }: { player: Player }) {
               <span className="material-symbols-outlined text-4xl">person</span>
             </div>
           )}
-        </div>
-        
-        <div className="absolute top-4 left-4 font-stat-lg text-stat-lg text-primary opacity-20 group-hover:opacity-100 transition-opacity duration-300 select-none">
-          #{player.number}
         </div>
         
         <h3 className="font-headline-md text-headline-md text-primary mb-1 uppercase leading-tight font-lexend font-bold">

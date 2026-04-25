@@ -18,8 +18,8 @@ export default function MatchTimelineItem({ match }: { match: Match }) {
 
   return (
     <article className={cn(
-      "relative border border-primary/10 rounded-lg p-element-gap transition-colors",
-      isFinished ? "bg-surface-container-low border-surface-variant opacity-80" : "bg-surface-container-lowest hover:border-primary/30"
+      "relative border border-outline-variant rounded-lg p-element-gap transition-colors shadow-none",
+      isFinished ? "bg-surface-container-low opacity-80" : "bg-surface-container-lowest"
     )}>
       {/* Timeline Dot (Rojo para local a futuro, Gris suave para visitante, Gris oscuro si finalizó) */}
       <div className={cn(
