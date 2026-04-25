@@ -121,26 +121,38 @@ export default function TopNav() {
         </div>
       </div>
 
-      {/* Mobile Menu Content */}
+      {/* Mobile Menu Content (Full Screen Drawer) */}
       {mobileMenuOpen && (
-        <nav className="md:hidden bg-white dark:bg-slate-900 border-b border-slate-100 dark:border-slate-800 px-margin-mobile py-4 flex flex-col gap-2">
-          <Link href="/matches" onClick={() => setMobileMenuOpen(false)} className="px-4 font-label-md text-slate-600 dark:text-slate-300 min-h-[44px] flex items-center rounded hover:bg-surface-container-low transition-colors">Partidos</Link>
-          <Link href="#" onClick={() => setMobileMenuOpen(false)} className="px-4 font-label-md text-blue-800 dark:text-blue-400 font-bold bg-blue-50 dark:bg-slate-800 rounded min-h-[44px] flex items-center">Noticias</Link>
-          <Link href="/squad" onClick={() => setMobileMenuOpen(false)} className="px-4 font-label-md text-slate-600 dark:text-slate-300 min-h-[44px] flex items-center rounded hover:bg-surface-container-low transition-colors">Plantilla</Link>
-          <Link href="#" onClick={() => setMobileMenuOpen(false)} className="px-4 font-label-md text-slate-600 dark:text-slate-300 min-h-[44px] flex items-center rounded hover:bg-surface-container-low transition-colors">Boletos</Link>
-          <Link href="/comunidad" onClick={() => setMobileMenuOpen(false)} className="px-4 font-label-md text-slate-600 dark:text-slate-300 min-h-[44px] flex items-center rounded hover:bg-surface-container-low transition-colors">Comunidad</Link>
-          
-          {!user && (
-            <Link
-              href="?auth=login"
-              onClick={() => setMobileMenuOpen(false)}
-              scroll={false}
-              className="mt-4 bg-primary text-on-primary font-label-md text-center rounded min-h-[44px] flex items-center justify-center shadow-sm"
-            >
-              Únete
+        <div className="fixed inset-0 z-40 bg-white/95 dark:bg-slate-900/95 backdrop-blur-lg pt-24 px-6 flex flex-col md:hidden animate-in fade-in duration-200">
+          <nav className="flex flex-col gap-2">
+            <Link href="/matches" onClick={() => setMobileMenuOpen(false)} className="w-full text-center py-4 font-label-md text-lg text-slate-600 dark:text-slate-300 min-h-[44px] border-b border-outline-variant/20 hover:bg-surface-container-low transition-colors">
+              Partidos
             </Link>
-          )}
-        </nav>
+            <Link href="#" onClick={() => setMobileMenuOpen(false)} className="w-full text-center py-4 font-label-md text-lg text-blue-800 dark:text-blue-400 font-bold bg-blue-50 dark:bg-slate-800 rounded min-h-[44px] hover:bg-blue-100 dark:hover:bg-slate-700 transition-colors">
+              Noticias
+            </Link>
+            <Link href="/squad" onClick={() => setMobileMenuOpen(false)} className="w-full text-center py-4 font-label-md text-lg text-slate-600 dark:text-slate-300 min-h-[44px] border-b border-outline-variant/20 hover:bg-surface-container-low transition-colors">
+              Plantilla
+            </Link>
+            <Link href="#" onClick={() => setMobileMenuOpen(false)} className="w-full text-center py-4 font-label-md text-lg text-slate-600 dark:text-slate-300 min-h-[44px] border-b border-outline-variant/20 hover:bg-surface-container-low transition-colors">
+              Boletos
+            </Link>
+            <Link href="/comunidad" onClick={() => setMobileMenuOpen(false)} className="w-full text-center py-4 font-label-md text-lg text-slate-600 dark:text-slate-300 min-h-[44px] hover:bg-surface-container-low transition-colors">
+              Comunidad
+            </Link>
+            
+            {!user && (
+              <Link
+                href="?auth=login"
+                onClick={() => setMobileMenuOpen(false)}
+                scroll={false}
+                className="w-full mt-6 bg-primary text-on-primary font-label-md text-center py-4 text-lg rounded-lg min-h-[44px] shadow-sm hover:bg-primary-container transition-colors"
+              >
+                Únete
+              </Link>
+            )}
+          </nav>
+        </div>
       )}
     </header>
   );
