@@ -9,6 +9,8 @@ export const metadata: Metadata = {
   description: "Conoce a la plantilla oficial de Cruz Azul para la presente temporada. Porteros, Defensas, Medios y Delanteros.",
 };
 
+export const revalidate = 3600;
+
 export default async function SquadPage() {
   const players = await getSquadPlayers();
 

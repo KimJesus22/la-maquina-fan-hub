@@ -14,7 +14,7 @@ export async function sendFanMessage(formData: FormData) {
   }
 
   // Rate Limiting Básico
-  const userId = session.id || session.email;
+  const userId = (session.id || session.email) as string;
   const now = Date.now();
   const lastMessageTime = rateLimitMap.get(userId);
 

@@ -29,8 +29,8 @@ export default function MuroAficion({ initialMessages, currentUserEmail }: { ini
     // 1. Conectar a Realtime
     insforge.realtime.connect().then(() => {
       // 2. Suscribirse al canal
-      insforge.realtime.subscribe("chat:fan_muro").then(({ ok, error }) => {
-        if (!ok) console.error("Error al suscribirse al canal:", error);
+      insforge.realtime.subscribe("chat:fan_muro").then((res) => {
+        if (!res.ok) console.error("Error al suscribirse al canal:", res.error);
       });
     });
 

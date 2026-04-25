@@ -4,6 +4,8 @@ import MatchTimelineItem from "@/components/MatchTimelineItem";
 import EmptyState from "@/components/EmptyState";
 import { getMatches } from "@/app/actions/data";
 
+export const revalidate = 3600;
+
 export default async function MatchesPage() {
   const matches = await getMatches();
 
